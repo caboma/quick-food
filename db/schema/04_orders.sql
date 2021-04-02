@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS orders CASCADE;
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  product_id INTEGER ARRAY REFERENCES products(id) ON DELETE CASCADE,
+  restaurant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
+  sub_total INTEGER NOT NULL,
+  tax_rate INTEGER NOT NULL,
+  delivery_fee INTEGER NOT NULL,
+  total_price INTEGER NOT NULL,
+  is_pickup BOOLEAN DEFAULT FALSE
+  );
