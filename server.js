@@ -1,9 +1,6 @@
 // load .env data into process.env
 require('dotenv').config();
 
-// Test that Twilio .env files are set up correctly
-console.log('Your environment variable TWILIO_ACCOUNT_SID has the value: ', process.env.TWILIO_ACCOUNT_SID);
-
 // Web server config
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
@@ -12,16 +9,6 @@ const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
-
-//Twilio config
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
-
-app.post('/sms', (req, res) => {
-  const twiml = new MessagingResponse();
-  twiml.message('The Robots are coming! Head for the hills!');
-  res.writeHead(200, {'Content-Type': 'text/xml'});
-  res.end(twiml.toString());
-});
 
 // PG database client/connection setup
 const { Pool } = require('pg');
