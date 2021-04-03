@@ -1,6 +1,9 @@
 // load .env data into process.env
 require('dotenv').config();
 
+// Test that Twilio .env files are set up correctly
+console.log('Your environment variable TWILIO_ACCOUNT_SID has the value: ', process.env.TWILIO_ACCOUNT_SID);
+
 // Web server config
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
