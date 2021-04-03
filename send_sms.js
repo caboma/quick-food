@@ -7,6 +7,7 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
+// Initial test message
 client.messages
   .create({
      body: 'Your order will be ready for pick up in 5 minutes!',
@@ -15,3 +16,5 @@ client.messages
    })
   .then(message => console.log(message.sid, message.status))
   .catch(err => console.error(err));
+
+// jQuery to send AJAX request to send message
