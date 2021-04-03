@@ -13,5 +13,5 @@ client.messages
      from: '+13658000804',
      to: '+16137905701'
    })
-  .then(message => console.log(message.sid))
+  .then(message => console.log(message.sid, message.status))
   .catch(err => console.error(err));
