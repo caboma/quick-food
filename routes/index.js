@@ -15,7 +15,7 @@ module.exports = (db) => {
     db.query(query)
       .then(data => {
         const products = data.rows;
-        res.json({products});
+        res.render('../views/index');
       })
       .catch(err => {
         res
