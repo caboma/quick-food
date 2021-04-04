@@ -1,0 +1,20 @@
+:root{
+  --darkgray: #393a39;
+  --darkblue: #003049;
+  --red: #D62828;
+  --orange: #F77F00;
+  --yellow: #FCBF49;
+  --offwhite: #EAE2B7;
+  --white: #FFF;
+}
+
+footer{
+  width: 100%;
+  height: 50px;
+  background-color: var(--darkgray);
+  color: var(--white);
+  padding: 10px;
+}
+footer p{
+  text-align: center;
+}
