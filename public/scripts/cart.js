@@ -36,7 +36,7 @@ const addItemToCartRow = (productName, productPrice, productId) => {
 
 
 // Create event handler for each product card
-// Event handler for first burger on page
+// Event handler for first burger on page.
 $(document).ready(function () {
   console.log("The document is ready");
   $('.get-ids').css('display', 'none');
@@ -79,3 +79,4 @@ $(document).ready(function () {
 });
 
 // The items from the array are dynamically added/displayed in the sidebar
+
