@@ -1,0 +1,36 @@
+:root{
+  --darkgray: #393a39;
+  --darkblue: #003049;
+  --red: #D62828;
+  --orange: #F77F00;
+  --yellow: #FCBF49;
+  --offwhite: #EAE2B7;
+  --white: #FFF;
+}
+.dashboard {
+  padding: 20px;
+}
+
+.tab-pane {
+  padding: 20px;
+}
+#btn-order-confirm, #btn-order-ready {
+  margin: 0px 5px;
+  border: 1px solid var(--orange);
+  color: var(--orange);
+}
+#btn-order-confirm:hover {
+  background-color: var(--orange);
+  border: none;
+  color: var(--white);
+}
+#btn-order-ready:hover {
+  background-color: var(--orange);
+  border: none;
+  color: var(--white);
+}
+
+.order-row:hover {
+  cursor: pointer;
+  background-color: var(--offwhite);
+}
