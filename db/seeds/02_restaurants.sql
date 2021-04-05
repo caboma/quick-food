@@ -1,4 +1,4 @@
-INSERT INTO restaurants (name)
+INSERT INTO restaurants (name, password)
 VALUES
 ('McDonalds', 'ThisIsMyPassword'),
 ('Burger King','ThisIsMyPassword'),
