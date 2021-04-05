@@ -20,6 +20,7 @@
   <link rel="stylesheet" type="text/css" href="/styles/product-menu.css">
   <link rel="stylesheet" type="text/css" href="/styles/order-details.css">
   <link rel="stylesheet" type="text/css" href="/styles/footer.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/cart.js"></script>
 </head>
@@ -67,6 +68,7 @@
           <div class="row" id="productList">
             <% for(let item in product) { %>
               <div class="card">
+                <p class="get-ids"><% console.log(product[item].id) %></p>
                 <img src="<%= product[item].image %>" class="card-img-top" alt="...">
                 <h3 class="card-title">
                   <%= product[item].name %>
@@ -78,7 +80,7 @@
                   <p>
                     <%= product[item].price_cents %>
                   </p>
-                  <a href="#"><i class="fas fa-cart-plus"></i></a>
+                  <a href="#"><i class="fas fa-cart-plus add-burg-event"></i></a>
                 </div>
               </div>
               <% } %>
@@ -90,7 +92,7 @@
               <h4>ORDER DETAILS</h4>
             </div>
             <div class="card-body">
-              <table class="table">
+              <table class="table cart-table">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">No</th>
@@ -122,15 +124,15 @@
                 <tbody>
                   <tr>
                     <th scope="row">Sub Total:</th>
-                    <td>$ 0.00</td>
+                    <td class="subtotal-line">$ 0.00</td>
                   </tr>
                   <tr>
                     <th scope="row">Tax:</th>
-                    <td>$ 0.00</td>
+                    <td class="taxtotal-line">$ 0.00</td>
                   </tr>
                   <tr>
                     <th scope="row">Total:</th>
-                    <td>$ 0.00</td>
+                    <td class="grandtotal-line">$ 0.00</td>
                   </tr>
                 </tbody>
               </table>
@@ -146,7 +148,6 @@
     <p> © 2021 QuickApp - Lighthouse Labs | Webdesign by Omar, Gabriel & Zac</p>
   </footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script>
   const menu = document.querySelector('#mobile-menu');
