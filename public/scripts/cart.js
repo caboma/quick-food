@@ -6,13 +6,13 @@ const calcSubTotal = (priceArr) => {
 };
 const calcGrandTotal = (subTotal) => {
   const taxRate = 1.13;
-  return taxRate * subTotal;
+  const total = taxRate * subTotal;
+  return Number(total.toFixed(2));
 };
 const calcTaxPaid = (subTot, grandTot) => {
-  return grandTot - subTot;
+  const taxes = grandTot - subTot;
+  return Number(taxes.toFixed(2));
 };
-
-
 
 
 // Classes may need to be added to index
@@ -23,12 +23,13 @@ let priceArray = []
 const addItemToCartRow = (productName, productPrice, productId) => {
   itemsInCart.push(productName);
   priceArray.push(productPrice / 100);
-  const $cartRow = $(`<tr>
-  <th scope="row">1</th>
+  const $cartRow = $(`
+  <tr>
+  <th scope="row">${itemsInCart.length}</th>
   <td>${productName}</td>
   <td>$ ${productPrice / 100}</td>
-  </tr>`);
-  $('.cart-table').append($cartRow);
+</tr>`);
+  $('.table-items').append($cartRow);
   return $cartRow;
 };
 
@@ -65,8 +66,6 @@ $(document).ready(function () {
     let newTaxPaid = calcTaxPaid(newSubTotal, newGrandTotal);
     console.log(newTaxPaid);
     $('.taxtotal-line').replaceWith(`<td class="taxtotal-line">$ ${newTaxPaid}</td>`);
-
-
   });
 });
 
