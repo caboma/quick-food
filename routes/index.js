@@ -10,12 +10,13 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM products`;
-    console.log(query);
-    db.query(query)
+    let queryString = `SELECT * FROM products`;
+    db.query(queryString)
       .then(data => {
-        const products = data.rows;
-        res.render('../views/index');
+        productLists = data.rows;
+        const templateVars = {product: productLists};
+        res.render("index", templateVars);
+
       })
       .catch(err => {
         res
