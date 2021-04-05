@@ -68,7 +68,7 @@
           <div class="row" id="productList">
             <% for(let item in product) { %>
               <div class="card">
-                <p class="get-ids"><% console.log(product[item].id) %></p>
+                <p class="get-ids"><%= product[item].id %></p>
                 <img src="<%= product[item].image %>" class="card-img-top" alt="...">
                 <h3 class="card-title">
                   <%= product[item].name %>
