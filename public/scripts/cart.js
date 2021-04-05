@@ -38,13 +38,13 @@ const getCartItemFromDb = (productId) => {
   WHERE id = $1;
   `;
   return pool.query(queryString, queryParams)
-  .then(res => {
-    if (res.rows) {
-      return res.rows[0];
-    } else {
-      return null;
-    }
-  })
+    .then(res => {
+      if (res.rows) {
+        return res.rows[0];
+      } else {
+        return null;
+      }
+    })
 };
 
 
@@ -66,10 +66,12 @@ const addItemToCartRow = (prodQueryResults) => {
 
 // Create event handler for each product card
 // Event handler for first burger on page
-$(document).ready(function() {
+$(document).ready(function () {
   console.log("Document ready");
   // On click event, the item is added to an array
-  $('.add-burg-event').on('click', function() {
+  $('.add-burg-event').on('click', function (e) {
+    e.preventDefault();
+    console.log('***********')
     let cartItem = getCartItemFromDb(id1);
     // Cart item should now be added to the actual cart
     addItemToCartRow(cartItem);
