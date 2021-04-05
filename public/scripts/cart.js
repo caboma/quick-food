@@ -18,8 +18,9 @@ const calcTaxPaid = (subTot, grandTot) => {
 // Classes may need to be added to index
 // Array to calculate subtotal tax, grant total
 // The array will hold the price for each item
-let itemsInCart = []
-let priceArray = []
+let itemsInCart = [];
+let idsInCart = [];
+let priceArray = [];
 const addItemToCartRow = (productName, productPrice, productId) => {
   itemsInCart.push(productName);
   priceArray.push(productPrice / 100);
@@ -38,6 +39,8 @@ const addItemToCartRow = (productName, productPrice, productId) => {
 // Event handler for first burger on page
 $(document).ready(function () {
   console.log("The document is ready");
+  $('.get-ids').css('display', 'none');
+
   $('.add-burg-event').on('click', function(e) {
     e.preventDefault();
     const h3 = $(this).closest('.card').find('.card-title');
@@ -52,6 +55,12 @@ $(document).ready(function () {
     console.log(productId);
     console.log(itemsInCart);
     addItemToCartRow(productTitle, productPrice);
+
+    let prodId = $(this).closest('.card').find('.get-ids');
+    prodId = prodId.text().trim()
+    idsInCart.push(prodId);
+    console.log("IDs Arr:", idsInCart);
+
 
     // Adjusting subtotal
     console.log(priceArray);
