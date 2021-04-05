@@ -11,12 +11,13 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     let queryString = `SELECT * FROM products`;
+    //value from login, we will use it to link the order with the logged id.
+    // console.log(req.session.user_id)
     db.query(queryString)
       .then(data => {
         productLists = data.rows;
         const templateVars = {product: productLists};
         res.render("index", templateVars);
-
       })
       .catch(err => {
         res
