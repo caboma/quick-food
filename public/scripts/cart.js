@@ -1,17 +1,3 @@
-// Temporary variables for debugging
-
-const id1 = 'Cheese Burguer';
-const id2 = 'Cheese Burguer Bacon';
-const id3 = 'Chicken Sandwich';
-const id4 = 'Cheese Burger Combo';
-const id5 = 'Cheese Burger Bacon Combo';
-const id6 = 'Chicken Sandwich Combo';
-const id7 = 'Fries';
-const id8 = 'Coke';
-const id9 = 'Orange Juice';
-const id10 = 'Sprite';
-const id11 = 'Canada Dry';
-
 
 // Calculate subtotal, tax, and total
 const calcSubTotal = (priceArr) => {
@@ -27,40 +13,25 @@ const calcTaxPaid = (subTot, grandTot) => {
 };
 
 
-// Build SELECT statements to populate the cart
-// This function will be called once for each product added
-const getCartItemFromDb = (productId) => {
-  const queryParams = [];
-  queryParams.push(productId);
-  let queryString = `
-  SELECT id, name, price_cents * 100 AS price
-  FROM products
-  WHERE id = $1;
-  `;
-  return pool.query(queryString, queryParams)
-    .then(res => {
-      if (res.rows) {
-        return res.rows[0];
-      } else {
-        return null;
-      }
-    })
-};
+
 
 // Classes may need to be added to index
 // Array to calculate subtotal tax, grant total
 // The array will hold the price for each item
 let itemsInCart = []
+let priceArray = []
 const addItemToCartRow = (productName, productPrice, productId) => {
-  //itemsInCart.push(productId);
+  itemsInCart.push(productName);
+  priceArray.push(productPrice / 100);
   const $cartRow = $(`<tr>
   <th scope="row">1</th>
   <td>${productName}</td>
-  <td>${productPrice}</td>
+  <td>$ ${productPrice / 100}</td>
   </tr>`);
   $('.cart-table').append($cartRow);
   return $cartRow;
 };
+
 
 // Create event handler for each product card
 // Event handler for first burger on page
@@ -70,11 +41,32 @@ $(document).ready(function () {
     e.preventDefault();
     const h3 = $(this).closest('.card').find('.card-title');
     const p = $(this).closest('.card').find('.card-footer');
+    const p2 = $(this).closest('.card').find('.get-ids');
+    console.log(p2);
     let productTitle = h3.text().trim();
     let productPrice = p.text().trim();
+    let productId = p2.text().trim();
     console.log(productTitle);
     console.log(productPrice);
+    console.log(productId);
+    console.log(itemsInCart);
     addItemToCartRow(productTitle, productPrice);
+
+    // Adjusting subtotal
+    console.log(priceArray);
+    let newSubTotal = calcSubTotal(priceArray);
+    console.log(newSubTotal);
+    $('.subtotal-line').replaceWith(`<td class="subtotal-line">$ ${newSubTotal}</td>`);
+
+    let newGrandTotal = calcGrandTotal(newSubTotal);
+    console.log(newGrandTotal);
+    $('.grandtotal-line').replaceWith(`<td class="grandtotal-line">$ ${newGrandTotal}</td>`);
+
+    let newTaxPaid = calcTaxPaid(newSubTotal, newGrandTotal);
+    console.log(newTaxPaid);
+    $('.taxtotal-line').replaceWith(`<td class="taxtotal-line">$ ${newTaxPaid}</td>`);
+
+
   });
 });
 
