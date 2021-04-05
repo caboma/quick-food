@@ -11,7 +11,6 @@ const app = express();
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 
-
 // PG database client/connection setup
 const {Pool} = require('pg');
 const dbParams = require('./lib/db.js');
@@ -37,12 +36,12 @@ app.use(cookieSession({
   keys: ['key1', 'key2'],
 }));
 
-
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const productsRoutes = require("./routes");
-const loginRoutes = require("./routes/login");
+const loginRoutes = require("./routes/user_login");
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
