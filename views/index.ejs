@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Quick Food App</title>
-	<link rel="icon" href="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Quick Food App</title>
+  <link rel="icon" href="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="keywords" content="" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
@@ -16,10 +19,13 @@
   <link rel="stylesheet" type="text/css" href="/styles/product-menu.css">
   <link rel="stylesheet" type="text/css" href="/styles/order-details.css">
   <link rel="stylesheet" type="text/css" href="/styles/footer.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/cart.js"></script>
 </head>
+
 <body>
-	<div class="nav-container">
+  <div class="nav-container">
     <nav class="navbar">
       <h1 id="navbar-logo"><span>QUICK</span>FOOD</h1>
       <div class="menu-toggle" id="mobile-menu">
@@ -61,15 +67,22 @@
           <div class="row" id="productList">
             <% for(let item in product) { %>
               <div class="card">
+                <p class="get-ids"><%= product[item].id %></p>
                 <img src="<%= product[item].image %>" class="card-img-top" alt="...">
-                <h3 class="card-title"><%= product[item].name %></h3>
-                <p class="card-text"><%= product[item].description %></p>
+                <h3 class="card-title">
+                  <%= product[item].name %>
+                </h3>
+                <p class="card-text">
+                  <%= product[item].description %>
+                </p>
                 <div class="card-footer">
-                  <p><%= product[item].price_cents %></p>
-                  <a href="#"><i class="fas fa-cart-plus"></i></a>
+                  <p>
+                    <%= product[item].price_cents %>
+                  </p>
+                  <a href="#"><i class="fas fa-cart-plus add-burg-event"></i></a>
                 </div>
               </div>
-            <% } %>
+              <% } %>
           </div>
         </div>
         <div class="order-details col-sm-5 col-lg-3">
@@ -78,7 +91,7 @@
               <h4>ORDER DETAILS</h4>
             </div>
             <div class="card-body">
-              <table class="table">
+              <table class="table cart-table">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">No</th>
@@ -86,11 +99,11 @@
                     <th scope="col">Price</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
+                <tbody class="table-items">
+                  <!-- <tr>
                     <th scope="row">1</th>
                     <td>Burger</td>
-                    <td>$ 10.0</td>
+                    <td>$ 7.0</td>
                   </tr>
                   <tr>
                     <th scope="row">2</th>
@@ -101,7 +114,7 @@
                     <th scope="row">3</th>
                     <td>Taco</td>
                     <td>$ 20.0</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
@@ -110,15 +123,15 @@
                 <tbody>
                   <tr>
                     <th scope="row">Sub Total:</th>
-                    <td>$ 0.00</td>
+                    <td class="subtotal-line">$ 0.00</td>
                   </tr>
                   <tr>
                     <th scope="row">Tax:</th>
-                    <td>$ 0.00</td>
+                    <td class="taxtotal-line">$ 0.00</td>
                   </tr>
                   <tr>
                     <th scope="row">Total:</th>
-                    <td>$ 0.00</td>
+                    <td class="grandtotal-line">$ 0.00</td>
                   </tr>
                 </tbody>
               </table>
@@ -131,18 +144,17 @@
     </div>
   </section>
   <footer>
-    <p>	© 2021 QuickApp - Lighthouse Labs | Webdesign by Omar, Gabriel & Zac</p>
+    <p> © 2021 QuickApp - Lighthouse Labs | Webdesign by Omar, Gabriel & Zac</p>
   </footer>
 </body>
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	<script>
-    const menu = document.querySelector('#mobile-menu');
-    const menuLinks = document.querySelector('.nav-menu');
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+  const menu = document.querySelector('#mobile-menu');
+  const menuLinks = document.querySelector('.nav-menu');
+  menu.addEventListener('click', function () {
+    menu.classList.toggle('is-active');
+    menuLinks.classList.toggle('active');
+  })
+</script>
 
-    menu.addEventListener('click', function() {
-      menu.classList.toggle('is-active');
-      menuLinks.classList.toggle('active');
-    })
-  </script>
 </html>
