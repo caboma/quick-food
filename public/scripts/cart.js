@@ -47,41 +47,35 @@ const getCartItemFromDb = (productId) => {
     })
 };
 
-
+// Classes may need to be added to index
 // Array to calculate subtotal tax, grant total
 // The array will hold the price for each item
 let itemsInCart = []
-
-const addItemToCartRow = (prodQueryResults) => {
-  itemsInCart.push(cartItem.price);
+const addItemToCartRow = (productName, productPrice, productId) => {
+  //itemsInCart.push(productId);
   const $cartRow = $(`<tr>
   <th scope="row">1</th>
-  <td>${cartItem.name}</td>
-  <td>${cartItem.price}</td>
+  <td>${productName}</td>
+  <td>${productPrice}</td>
   </tr>`);
-  $('#cart-table-body').append($cartRow);
+  $('.cart-table').append($cartRow);
   return $cartRow;
 };
-
 
 // Create event handler for each product card
 // Event handler for first burger on page
 $(document).ready(function () {
-  console.log("Document ready");
-  // On click event, the item is added to an array
-  $('.add-burg-event').on('click', function (e) {
+  console.log("The document is ready");
+  $('.add-burg-event').on('click', function(e) {
     e.preventDefault();
-    console.log('***********')
-    let cartItem = getCartItemFromDb(id1);
-    // Cart item should now be added to the actual cart
-    addItemToCartRow(cartItem);
-    // Calculate subtotal, tax, and total
+    const h3 = $(this).closest('.card').find('.card-title');
+    const p = $(this).closest('.card').find('.card-footer');
+    let productTitle = h3.text().trim();
+    let productPrice = p.text().trim();
+    console.log(productTitle);
+    console.log(productPrice);
+    addItemToCartRow(productTitle, productPrice);
   });
 });
-
-
-
-
-
 
 // The items from the array are dynamically added/displayed in the sidebar
