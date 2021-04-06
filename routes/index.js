@@ -163,21 +163,13 @@ module.exports = (db) => {
           const userID = userData[user].id;
 
           //Load restaurant dashboard is user permission is admin
-<<<<<<< HEAD
-          if(userPermission === 'admin'){
-=======
           if (userPermission === 'admin') {
->>>>>>> feature-sms-on-order
             req.session['user_id'] = userID;
             res.redirect('/restaurant');
           }
 
           //Load product page is user permission is user
-<<<<<<< HEAD
-          if(userPermission === 'user'){
-=======
           if (userPermission === 'user') {
->>>>>>> feature-sms-on-order
             req.session['user_id'] = userID;
             res.redirect('/');
           }
