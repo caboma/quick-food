@@ -34,3 +34,8 @@
   cursor: pointer;
   background-color: var(--offwhite);
 }
+
+.alert-danger {
+  margin: 50px;
+  text-align: center;
+}

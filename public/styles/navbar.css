@@ -81,6 +81,23 @@
   cursor: pointer;
 }
 
+.modalBtnSubmit{
+  background-color: var(--orange);
+  color: var(--white);
+  border: none;
+}
+.modalBtnSubmit:hover{
+  background-color: var(--yellow);
+  color: var(--white);
+  border: none;
+}
+
+.logout:hover {
+  background-color: var(--yellow);
+  border: none;
+}
+
+
 /* END OF NAVIGATION */
 
 /* MEDIA SCREENS */
@@ -89,14 +106,15 @@
     position: relative;
   }
   .nav-menu {
-    display: flex;
+    display: grid;
     grid-template-columns: auto;
     margin:0;
     padding: 0;
     width: 100%;
     position: absolute;
     top: 50px;
-    
+    z-index: 10;
+    left: -100%;
     opacity: 0;
     background-color: rgba(234, 226, 183, 0.5);
     transition: all 0.5s ease;
@@ -112,7 +130,7 @@
     background-color: var(--yellow);
     color: var(--white);
   }
-  
+
   .nav-menu.active {
     left: 0;
     opacity: 1;

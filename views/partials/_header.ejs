@@ -19,6 +19,7 @@
   <link rel="stylesheet" type="text/css" href="/styles/product-menu.css">
   <link rel="stylesheet" type="text/css" href="/styles/order-details.css">
   <link rel="stylesheet" type="text/css" href="/styles/dashboard.css">
+  <link rel="stylesheet" href="/styles/login.css">
   <link rel="stylesheet" type="text/css" href="/styles/footer.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -26,18 +27,37 @@
 </head>
 <body>
   <div class="nav-container">
-    <nav class="navbar">
-      <h1 id="navbar-logo"><span>QUICK</span>FOOD</h1>
-      <div class="menu-toggle" id="mobile-menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
-      <ul class="nav-menu">
-        <li><a href="#" class="nav-links">Login</a></li>
-        <li><a href="#" class="nav-links">Register</a></li>
-      </ul>
-    </nav>
+    <% if (user) { %>
+      <nav class="navbar">
+        <h1 id="navbar-logo"><span>QUICK</span>FOOD</h1>
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="nav-menu">
+          <li class="currentUser"></li>
+          <form method="POST" action="/logout">
+            <button class="btn btn-outline-light my-2 my-sm-0 logout" type="submit">Logout</button>
+          </form>
+        </ul>
+      </nav>
+    <% } else { %>
+      <nav class="navbar">
+        <h1 id="navbar-logo"><span>QUICK</span>FOOD</h1>
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="nav-menu">
+          <li class="currentUser"></li>
+          <li><a href="#" class="nav-links" data-toggle="modal" data-target="#loginModal">Login</a></li>
+          <li><a href="#" class="nav-links" data-toggle="modal" data-target="#registerModal">Register</a></li>
+        </ul>
+      </nav>
+    <% } %>
+
   </div>
   <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
@@ -60,3 +80,4 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+
