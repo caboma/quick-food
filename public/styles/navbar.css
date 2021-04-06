@@ -94,14 +94,15 @@
     position: relative;
   }
   .nav-menu {
-    display: flex;
+    display: grid;
     grid-template-columns: auto;
     margin:0;
     padding: 0;
     width: 100%;
     position: absolute;
     top: 50px;
-
+    z-index: 10;
+    left: -100%;
     opacity: 0;
     background-color: rgba(234, 226, 183, 0.5);
     transition: all 0.5s ease;
