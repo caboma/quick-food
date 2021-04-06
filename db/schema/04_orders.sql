@@ -3,6 +3,6 @@ CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   restaurant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
-  ready_for_pickup BOOLEAN DEFAULT FALSE,
-  fulfilled BOOLEAN DEFAULT FALSE
+  total_amount INTEGER DEFAULT 0,
+  status VARCHAR(255)
   );
