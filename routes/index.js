@@ -52,7 +52,6 @@ module.exports = (db) => {
   //Check user details if already registered in database
   router.post("/login", (req, res) => {
     const email = req.body.email;
-    const password = req.body.password;
 
     let queryString = `SELECT * FROM users WHERE email = '${email}'`;
 
@@ -88,12 +87,30 @@ module.exports = (db) => {
   router.post("/restaurant", (req, res) => {
     const order_id = req.body.orderID;
     const order_status = req.body.status;
-    console.log(req.body)
 
     let queryString = `UPDATE orders SET status = '${order_status}' WHERE id = '${order_id}'`;
     db.query(queryString)
       .then(data => {
         res.redirect('/restaurant');
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({error: err.message});
+      });
+  })
+
+  router.post("/register", (req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const contact = req.body.contactNo;
+
+    let queryString = `INSERT INTO users (name, email, phone, password, permission)
+                       VALUES ('${name}', '${email}', ${contact}, '${password}', 'user')`;
+    db.query(queryString)
+      .then(data => {
+        res.redirect('/');
       })
       .catch(err => {
         res

@@ -81,10 +81,22 @@
   cursor: pointer;
 }
 
+.modalBtnSubmit{
+  background-color: var(--orange);
+  color: var(--white);
+  border: none;
+}
+.modalBtnSubmit:hover{
+  background-color: var(--yellow);
+  color: var(--white);
+  border: none;
+}
+
 .logout:hover {
   background-color: var(--yellow);
   border: none;
 }
+
 
 /* END OF NAVIGATION */
 
