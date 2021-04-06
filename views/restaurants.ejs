@@ -1,83 +1,92 @@
 <%- include('partials/_header') %>
-  <div class="container dashboard">
-    <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-dashboard-tab" data-toggle="tab" href="#nav-dashboard" role="tab" aria-controls="nav-dashboard" aria-selected="true">Dashboard</a>
-        <a class="nav-item nav-link" id="nav-messages-tab" data-toggle="tab" href="#nav-messages" role="tab" aria-controls="nav-messages" aria-selected="false">Messages</a>
-        <a class="nav-item nav-link" id="nav-products-tab" data-toggle="tab" href="#nav-products" role="tab" aria-controls="nav-products" aria-selected="false">Products</a>
-      </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel" aria-labelledby="nav-dashboard-tab">
-        <table id="order-table" class="table">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">Order No</th>
-              <th scope="col">Customer Name</th>
-              <th scope="col">Total</th>
-              <th scope="col">Status</th>
-              <th scope="col">Remarks</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for(let order in orders) { %>
-              <tr class="order-row">
-                <td scope="row" name="order_number" data-toggle="modal" data-target="#orderDetails"><%= orders[order].order_number %></td>
-                <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].customer %></td>
-                <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].total / 100%></td>
-                <td>
-                  <form method="POST" action="/restaurant">
-                    <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
-                    <input name="status" type="hidden" value="Confirmed">
-                    <button type="submit" class="btn btn-outline-secondary" id="btn-order-confirm"><i class="far fa-thumbs-up"></i></button>
-                  </form>
-                  <form method="POST" action="/restaurant">
-                    <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
-                    <input name="status" type="hidden" value="Ready">
-                    <button type="submit" class="btn btn-outline-secondary" id="btn-order-ready"><i class="far fa-check-circle"></i></button>
-                  </form>
-                </td>
-                <td><%= orders[order].status %></td>
+  <% if (user) { %>
+    <div class="container dashboard">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-dashboard-tab" data-toggle="tab" href="#nav-dashboard" role="tab" aria-controls="nav-dashboard" aria-selected="true">Dashboard</a>
+          <a class="nav-item nav-link" id="nav-messages-tab" data-toggle="tab" href="#nav-messages" role="tab" aria-controls="nav-messages" aria-selected="false">Messages</a>
+          <a class="nav-item nav-link" id="nav-products-tab" data-toggle="tab" href="#nav-products" role="tab" aria-controls="nav-products" aria-selected="false">Products</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel" aria-labelledby="nav-dashboard-tab">
+          <table id="order-table" class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Order No</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Total</th>
+                <th scope="col">Status</th>
+                <th scope="col">Remarks</th>
               </tr>
-            <% } %>
-          </tbody>
-        </table>
-        <!-- Modal -->
-        <div class="modal fade" id="orderDetails" tabindex="-1" role="dialog" aria-labelledby="orderDetailsLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="orderDetailsLabel">Order No: </h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <table class="table">
-                  <thead class="thead-light">
-                    <tr>
-                      <th scope="col">Item</th>
-                      <th scope="col">Qty</th>
-                      <th scope="col">Price</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% for(let order in orders) { %>
-                      <tr class="order-row">
-                        <th scope="row"><%= orders[order].order_number %></th>
-                        <td><%= orders[order].customer %></td>
-                        <td>$ <%= orders[order].total / 100%></td>
+            </thead>
+            <tbody>
+              <% for(let order in orders) { %>
+                <tr class="order-row">
+                  <td scope="row" name="order_number" data-toggle="modal" data-target="#orderDetails"><%= orders[order].order_number %></td>
+                  <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].customer %></td>
+                  <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].total / 100%></td>
+                  <td>
+                    <form method="POST" action="/restaurant">
+                      <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
+                      <input name="status" type="hidden" value="Confirmed">
+                      <button type="submit" class="btn btn-outline-secondary" id="btn-order-confirm"><i class="far fa-thumbs-up"></i></button>
+                    </form>
+                    <form method="POST" action="/restaurant">
+                      <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
+                      <input name="status" type="hidden" value="Ready">
+                      <button type="submit" class="btn btn-outline-secondary" id="btn-order-ready"><i class="far fa-check-circle"></i></button>
+                    </form>
+                  </td>
+                  <td><%= orders[order].status %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+          <!-- Modal -->
+          <div class="modal fade" id="orderDetails" tabindex="-1" role="dialog" aria-labelledby="orderDetailsLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="orderDetailsLabel">Order No: </h5>
+                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Price</th>
                       </tr>
-                    <% } %>
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      <% for(let order in orders) { %>
+                        <tr class="order-row">
+                          <th scope="row"><%= orders[order].order_number %></th>
+                          <td><%= orders[order].customer %></td>
+                          <td>$ <%= orders[order].total / 100%></td>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="tab-pane fade" id="nav-messages" role="tabpanel" aria-labelledby="nav-messages-tab">...</div>
+        <div class="tab-pane fade" id="nav-products" role="tabpanel" aria-labelledby="nav-products-tab">...</div>
       </div>
-      <div class="tab-pane fade" id="nav-messages" role="tabpanel" aria-labelledby="nav-messages-tab">...</div>
-      <div class="tab-pane fade" id="nav-products" role="tabpanel" aria-labelledby="nav-products-tab">...</div>
     </div>
-  </div>
+  <% } else { %>
+    <div class="container">
+      <div class="alert alert-danger" role="alert">
+        You are not authorized to view this page. Please login as admin to load the page.
+      </div>
+    </div>
+
+  <% } %>
   <%- include('partials/_footer') %>
 </body>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
