@@ -16,7 +16,7 @@ module.exports = (db) => {
 
   //Retrieve all products in the database and load menu/product page
   router.get("/", (req, res) => {
-    const userID = req.session['userId'];
+    const userID = req.session['user_id'];
     let queryString = `SELECT * FROM products`;
 
     db.query(queryString)
@@ -94,7 +94,7 @@ const testId = 1;
 
   //Retrieve all current orders and load restaurant dashboard. Only admin user can see this page
   router.get("/restaurant", (req, res) => {
-    const userID = req.session['userId'];
+    const userID = req.session['user_id'];
     const email = req.session['email'];
     let queryString = `
       SELECT orders.id AS order_number, users.name AS customer, orders.total_amount AS total, orders.status AS status
@@ -127,22 +127,24 @@ const testId = 1;
 
           //Load restaurant dashboard is user permission is admin
           if(userPermission === 'admin'){
-            req.session['userId'] = userID;
+            req.session['user_id'] = userID;
             res.redirect('/restaurant');
           }
 
           //Load product page is user permission is user
           if(userPermission === 'user'){
-            req.session['userId'] = userID;
+            req.session['user_id'] = userID;
             res.redirect('/');
           }
         }
+        console.log(req.session.user_id);
       })
       .catch(err => {
         res
           .status(500)
           .json({error: err.message});
       });
+
   })
 
   //Update the order status - confirm the order or order is ready
@@ -183,7 +185,7 @@ const testId = 1;
   })
 
   router.post("/logout", (req, res) => {
-    req.session['userId'] = null;
+    req.session['user_id'] = null;
     res.redirect('/');
   })
   return router;
