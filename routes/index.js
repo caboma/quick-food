@@ -25,7 +25,85 @@ module.exports = (db) => {
           .status(500)
           .json({error: err.message});
       });
+
   });
+
+/*
+      Column      |  Type   |                      Modifiers
+------------------+---------+-----------------------------------------------------
+ id               | integer | not null default nextval('orders_id_seq'::regclass)
+ user_id          | integer |
+ restaurant_id    | integer |
+ ready_for_pickup | boolean | default false
+ fulfilled        | boolean | default false
+*/
+
+const products = [2,2,2,2,2,2 ]
+  router.post("/", (req, res) =>{
+    const userId = req.session.user_id
+    const addItemToOrder = function (productsArray, userId, order_id) {
+      queryString = `
+      INSERT INTO order_details(order_id, product_id)
+      VALUES
+      `
+      for (const product of productsArray) {
+        queryString += `(${order_id}, ${product}),`
+      }
+      queryString = queryString.substring(0, queryString.length - 1) + `;`
+
+      console.log("*******************", queryString)
+      return db.query(queryString)
+        .then(res => console.log(res));
+    }
+
+    let maxIds = db.query(`
+      SELECT MAX(id) FROM orders;
+      `)
+      .then(maxIds => console.log("-----------------RES 62", maxIds.rows[0].max))
+
+      .then(maxIds => console.log('maxIds', maxIds));
+      parseInt(maxIds);
+      maxIds ++;
+
+
+      db.query(`
+      INSERT INTO orders (id, user_id)
+      VALUES (${maxIds}, ${userId})
+      RETURNING *;
+      `).then(res => {
+        console.log("48", res.rows);
+        return addItemToOrder(products, userId, maxIds);
+      }).catch(err => console.error(err));
+
+
+    //addItemToOrder(products, req.session.user_id, 3)
+        return router;
+    console.log("*************")
+    console.log("userid", req.session.user_id)
+
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   router.get("/restaurant", (req, res) => {
     let queryString = `
