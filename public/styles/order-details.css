@@ -7,3 +7,15 @@
   --offwhite: #EAE2B7;
   --white: #FFF;
 }
+.card-header{
+  background-color: var(--orange);
+  color: var(--white);
+}
+.placeOrder {
+  color: var(--orange);
+  border: 1px solid var(--orange);
+}
+.placeOrder:hover {
+  background-color: var(--orange);
+  border: none;
+}

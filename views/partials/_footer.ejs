@@ -1,3 +1,14 @@
-<footer>
-  <p>	© 2021 QuickApp - Lighthouse Labs | Webdesign by Omar, Gabriel & Zac</p>
-</footer>
+  <footer>
+    <p>	© 2021 QuickApp - Lighthouse Labs | Webdesign by Omar, Gabriel & Zac</p>
+  </footer>
+</body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+  const menu = document.querySelector('#mobile-menu');
+  const menuLinks = document.querySelector('.nav-menu');
+  menu.addEventListener('click', function () {
+    menu.classList.toggle('is-active');
+    menuLinks.classList.toggle('active');
+  })
+</script>
+</html>

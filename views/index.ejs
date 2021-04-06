@@ -40,25 +40,11 @@
                   </tr>
                 </thead>
                 <tbody class="table-items">
-                  <!-- <tr>
-                    <th scope="row">1</th>
-                    <td>Burger</td>
-                    <td>$ 7.0</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Burger Combo</td>
-                    <td>$ 12.0</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Taco</td>
-                    <td>$ 20.0</td>
-                  </tr> -->
+
                 </tbody>
               </table>
             </div>
-            <div class="card-footer">
+            <div class="card-body">
               <table class="table table-borderless">
                 <tbody>
                   <tr>
@@ -75,7 +61,11 @@
                   </tr>
                 </tbody>
               </table>
-              <form id="place-order-btn" action="/" method="POST"><button>Place Order</button></form>
+            </div>
+            <div class="card-footer placeOrderHolder">
+              <form id="place-order-btn" action="/" method="POST">
+                <button type="button" class="btn btn-outline-primary placeOrder">Place Order</button>
+              </form>
             </div>
           </div>
         </div>
@@ -83,15 +73,3 @@
     </div>
   </section>
   <%- include('partials/_footer') %>
-</body>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script>
-  const menu = document.querySelector('#mobile-menu');
-  const menuLinks = document.querySelector('.nav-menu');
-  menu.addEventListener('click', function () {
-    menu.classList.toggle('is-active');
-    menuLinks.classList.toggle('active');
-  })
-</script>
-
-</html>
