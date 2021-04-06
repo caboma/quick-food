@@ -8,11 +8,38 @@
 // index.js
 const express = require('express');
 const router = express.Router();
+//TWILIO API
+require('dotenv').config();
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+// Initial test message
+const message = 'Your order will be ready for pick up in 5 minutes!';
+const phone = '+16137905701';
 // const {idsInCart} = require('../public/scripts/cart');
-
 // const idsInCart = require('../public/scripts/cart');
 
+const getPhoneById = require('../public/helper_functions/getUserPhone')
+
+
+
+
+
+
+
 module.exports = (db) => {
+
+  const sendSms = (phone, message) => {
+
+    client.messages
+      .create({
+        body: message,
+        from: '+13658000804',
+        to: phone
+      })
+      .then(message => console.log(message.sid, message.status))
+      .catch(err => console.error(err));
+  };
 
   //Retrieve all products in the database and load menu/product page
   router.get("/", (req, res) => {
@@ -32,20 +59,20 @@ module.exports = (db) => {
       });
 
   });
-/*
-      Column      |  Type   |                      Modifiers
-------------------+---------+-----------------------------------------------------
- id               | integer | not null default nextval('orders_id_seq'::regclass)
- user_id          | integer |
- restaurant_id    | integer |
- ready_for_pickup | boolean | default false
- fulfilled        | boolean | default false
-*/
-//const products = [1,2,3,4,5,6];
-const products2 = [1,2,3,4,5,6];
-const testId = 1;
+  /*
+        Column      |  Type   |                      Modifiers
+  ------------------+---------+-----------------------------------------------------
+   id               | integer | not null default nextval('orders_id_seq'::regclass)
+   user_id          | integer |
+   restaurant_id    | integer |
+   ready_for_pickup | boolean | default false
+   fulfilled        | boolean | default false
+  */
+  //const products = [1,2,3,4,5,6];
+  const products2 = [1, 2, 3, 4, 5, 6];
+  const testId = 1;
 
-  router.post("/", (req, res) =>{
+  router.post("/", (req, res) => {
     console.log("45", req.body.ids); // has ids
     products = req.body.ids;
 
@@ -53,37 +80,47 @@ const testId = 1;
     console.log("52A", products);
 
 
-    console.log("46", req.data);
     const userId = req.session.user_id
     const addItemToOrder = function (productsArray, order_id) {
+      console.log("46", req.data);
       queryString = `
       INSERT INTO order_details(order_id, product_id)
       VALUES
+
       `
       for (const product of productsArray) {
         queryString += `(${order_id}, ${product}),`
       }
-      queryString = queryString.substring(0, queryString.length - 1) + `;`
-
+      queryString = queryString.substring(0, queryString.length - 1)
+      queryString += `RETURNING *;`;
       console.log("*******************", queryString)
       return db.query(queryString)
-        .then(res => console.log(res));
+        .then(res => {
+          console.log(res)
+          return res.rows
+        });
     }
 
-    const maxIdFunc = function() {
+    const maxIdFunc = function () {
       console.log('67', products);
       let maxIds = db.query(`
       INSERT INTO orders(id, user_id, restaurant_id)
       VALUES ((SELECT (MAX(id) + 1) FROM orders), ${userId}, 1)
       RETURNING *;
       `).then(res => {
-        console.log(res.rows[0].id)
-        addItemToOrder(products, res.rows[0].id)
+        return addItemToOrder(products, res.rows[0].id)
+      }).then(res => {
+        const message = `New order: ${res[0].order_id}. Login to your account to accept it.`
+        getPhoneById(2).then(phone => {
+          sendSms(phone, message)
+        })
       })
-      .catch(err => console.error(err));
+        .catch(err => console.error(err));
       return res.rows;
     }
-    console.log("***********", maxIdFunc())
+
+    maxIdFunc(res.rows)
+
     // .then(maxIds => console.log("-----------------RES 62", maxIds.rows[0].max)) // 7
     //addItemToOrder(products, req.session.user_id, 3)
     // return router;
@@ -121,19 +158,19 @@ const testId = 1;
     db.query(queryString)
       .then(data => {
         const userData = data.rows;
-        for (let user in userData){
+        for (let user in userData) {
           const userPermission = userData[user].permission;
           const userID = userData[user].id;
 
           //Load restaurant dashboard is user permission is admin
-          if(userPermission === 'admin'){
-            req.session['userId'] = userID;
+          if (userPermission === 'admin') {
+            req.session['user_id'] = userID;
             res.redirect('/restaurant');
           }
 
           //Load product page is user permission is user
-          if(userPermission === 'user'){
-            req.session['userId'] = userID;
+          if (userPermission === 'user') {
+            req.session['user_id'] = userID;
             res.redirect('/');
           }
         }
