@@ -8,6 +8,9 @@
 // index.js
 const express = require('express');
 const router = express.Router();
+// const {idsInCart} = require('../public/scripts/cart');
+
+// const idsInCart = require('../public/scripts/cart');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -39,6 +42,8 @@ module.exports = (db) => {
 const products = [1,2,3,4,5,6];
 const testId = 1;
   router.post("/", (req, res) =>{
+    console.log("45", req.body);
+    console.log("46", req.data);
     const userId = req.session.user_id
     const addItemToOrder = function (productsArray, order_id) {
       queryString = `
@@ -65,49 +70,17 @@ const testId = 1;
         console.log(res.rows[0].id)
         addItemToOrder(products, res.rows[0].id)
       })
-      // .then(maxIds => addItemToOrder(products, maxIds))
       .catch(err => console.error(err));
       return res.rows;
     }
     console.log("***********", maxIdFunc())
     // .then(maxIds => console.log("-----------------RES 62", maxIds.rows[0].max)) // 7
-
-
-    /*     const maxIdFunc = function(){
-          let maxIds = db.query(`
-            SELECT MAX(id) FROM orders;
-            `).then(res => res.rows[0])
-          return res.rows;
-        } */
-
     //addItemToOrder(products, req.session.user_id, 3)
-        return router;
-    console.log("*************")
-    console.log("userid", req.session.user_id)
+    // return router;
+    // console.log("*************")
+    // console.log("userid", req.session.user_id)
 
   })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   router.get("/restaurant", (req, res) => {
     let queryString = `

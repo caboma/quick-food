@@ -1,4 +1,3 @@
-
 // Calculate subtotal, tax, and total
 const calcSubTotal = (priceArr) => {
   // Sums the subtotal of all items in the array
@@ -14,12 +13,11 @@ const calcTaxPaid = (subTot, grandTot) => {
   return Number(taxes.toFixed(2));
 };
 
-
 // Classes may need to be added to index
 // Array to calculate subtotal tax, grant total
 // The array will hold the price for each item
 let itemsInCart = [];
-let idsInCart = [];
+let idsInCart = []; // Need this array in index.js
 let priceArray = [];
 const addItemToCartRow = (productName, productPrice, productId) => {
   itemsInCart.push(productName);
@@ -33,7 +31,6 @@ const addItemToCartRow = (productName, productPrice, productId) => {
   $('.table-items').append($cartRow);
   return $cartRow;
 };
-
 
 // Create event handler for each product card
 // Event handler for first burger on page.
@@ -59,8 +56,8 @@ $(document).ready(function () {
     let prodId = $(this).closest('.card').find('.get-ids');
     prodId = prodId.text().trim()
     idsInCart.push(prodId);
+    localStorage.setItem('ids', idsInCart);
     console.log("IDs Arr:", idsInCart);
-
 
     // Adjusting subtotal
     console.log(priceArray);
@@ -76,6 +73,15 @@ $(document).ready(function () {
     console.log(newTaxPaid);
     $('.taxtotal-line').replaceWith(`<td class="taxtotal-line">$ ${newTaxPaid}</td>`);
   });
+
+
+  $('#place-order-btn').on('submit', function (e) {e.preventDefault();
+    $.post({url: '/',
+            data: {ids: localStorage.getItem('ids')},
+            success: function () {alert('form was submitted');
+          }
+      });
+    });
 });
 
 // The items from the array are dynamically added/displayed in the sidebar
