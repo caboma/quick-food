@@ -27,7 +27,6 @@ module.exports = (db) => {
       });
 
   });
-
 /*
       Column      |  Type   |                      Modifiers
 ------------------+---------+-----------------------------------------------------
@@ -37,11 +36,11 @@ module.exports = (db) => {
  ready_for_pickup | boolean | default false
  fulfilled        | boolean | default false
 */
-
-const products = [2,2,2,2,2,2 ]
+const products = [1,2,3,4,5,6];
+const testId = 1;
   router.post("/", (req, res) =>{
     const userId = req.session.user_id
-    const addItemToOrder = function (productsArray, userId, order_id) {
+    const addItemToOrder = function (productsArray, order_id) {
       queryString = `
       INSERT INTO order_details(order_id, product_id)
       VALUES
@@ -56,25 +55,30 @@ const products = [2,2,2,2,2,2 ]
         .then(res => console.log(res));
     }
 
-    let maxIds = db.query(`
-      SELECT MAX(id) FROM orders;
-      `)
-      .then(maxIds => console.log("-----------------RES 62", maxIds.rows[0].max))
-
-      .then(maxIds => console.log('maxIds', maxIds));
-      parseInt(maxIds);
-      maxIds ++;
-
-
-      db.query(`
-      INSERT INTO orders (id, user_id)
-      VALUES (${maxIds}, ${userId})
+    const maxIdFunc = function() {
+      console.log('67', products);
+      let maxIds = db.query(`
+      INSERT INTO orders(id, user_id, restaurant_id)
+      VALUES ((SELECT (MAX(id) + 1) FROM orders), ${userId}, 1)
       RETURNING *;
       `).then(res => {
-        console.log("48", res.rows);
-        return addItemToOrder(products, userId, maxIds);
-      }).catch(err => console.error(err));
+        console.log(res.rows[0].id)
+        addItemToOrder(products, res.rows[0].id)
+      })
+      // .then(maxIds => addItemToOrder(products, maxIds))
+      .catch(err => console.error(err));
+      return res.rows;
+    }
+    console.log("***********", maxIdFunc())
+    // .then(maxIds => console.log("-----------------RES 62", maxIds.rows[0].max)) // 7
 
+
+    /*     const maxIdFunc = function(){
+          let maxIds = db.query(`
+            SELECT MAX(id) FROM orders;
+            `).then(res => res.rows[0])
+          return res.rows;
+        } */
 
     //addItemToOrder(products, req.session.user_id, 3)
         return router;
