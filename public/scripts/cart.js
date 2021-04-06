@@ -1,5 +1,6 @@
 // Calculate subtotal, tax, and total
 const calcSubTotal = (priceArr) => {
+  console.log("3", priceArr)
   // Sums the subtotal of all items in the array
   return priceArr.reduce((accumulator, currentValue) => accumulator + currentValue);
 };
@@ -21,12 +22,12 @@ let idsInCart = []; // Need this array in index.js
 let priceArray = [];
 const addItemToCartRow = (productName, productPrice, productId) => {
   itemsInCart.push(productName);
-  priceArray.push(productPrice / 100);
+  priceArray.push(productPrice);
   const $cartRow = $(`
   <tr>
   <th scope="row">${itemsInCart.length}</th>
   <td>${productName}</td>
-  <td>$ ${productPrice / 100}</td>
+  <td>$ ${productPrice}</td>
 </tr>`);
   $('.table-items').append($cartRow);
   return $cartRow;
@@ -46,6 +47,7 @@ $(document).ready(function () {
     console.log(p2);
     let productTitle = h3.text().trim();
     let productPrice = p.text().trim();
+    productPrice = Number(productPrice);
     let productId = p2.text().trim();
     console.log(productTitle);
     console.log(productPrice);
