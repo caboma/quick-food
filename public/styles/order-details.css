@@ -11,11 +11,11 @@
   background-color: var(--orange);
   color: var(--white);
 }
-.placeOrder {
+.btnPlaceOrder {
   color: var(--orange);
   border: 1px solid var(--orange);
 }
-.placeOrder:hover {
+.btnPlaceOrder:hover {
   background-color: var(--orange);
   border: none;
 }
