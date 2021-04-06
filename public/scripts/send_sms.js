@@ -14,23 +14,28 @@ const phone = '+16137905701';
 const sendSms = (phone, message) => {
   client.messages
     .create({
-       body: message,
-       from: '+13658000804',
-       to: phone
-     })
-    .then(message => console.log(message.sid, message.status))
-    .catch(err => console.error(err));
+      body: message,
+      from: '+13658000804',
+      to: phone
+    })
+  // .then(message => console.log(message.sid, message.status))
+  // .catch(err => console.error(err));
 };
+
+
+
 // sendSms(phone, message);
 
 // jQuery button/sms event handler
-$(document).ready(function () {
-  // Send sms to restaurant when client places order
-  $('#client-place-order').on('click', function() {
-    sendSms(phone, message);
-  })
-  // Send sms to client when restaurant confirms order
-  $('#restaurant-confirm-order').on('click', function() {
-    sendSms(phone, message);
-  })
-});
+// $(document).ready(function () {
+//   // Send sms to restaurant when client places order
+//   $('#client-place-order').on('click', function () {
+//     sendSms(phone, message);
+//   })
+//   // Send sms to client when restaurant confirms order
+//   $('#restaurant-confirm-order').on('click', function () {
+//     sendSms(phone, message);
+//   })
+// });
+
+
