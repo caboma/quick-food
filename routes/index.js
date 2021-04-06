@@ -10,11 +10,12 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
+
+  //Retrieve all products in the database and load menu/product page
   router.get("/", (req, res) => {
     const userID = req.session['userId'];
     let queryString = `SELECT * FROM products`;
-    //value from login, we will use it to link the order with the logged id.
-    // console.log(req.session.user_id)
+
     db.query(queryString)
       .then(data => {
         productLists = data.rows;
@@ -28,8 +29,10 @@ module.exports = (db) => {
       });
   });
 
+  //Retrieve all current orders and load restaurant dashboard. Only admin user can see this page
   router.get("/restaurant", (req, res) => {
     const userID = req.session['userId'];
+    const email = req.session['email'];
     let queryString = `
       SELECT orders.id AS order_number, users.name AS customer, orders.total_amount AS total, orders.status AS status
       FROM orders JOIN users ON orders.user_id = users.id ORDER BY orders.id`;
@@ -46,20 +49,27 @@ module.exports = (db) => {
       });
   })
 
+  //Check user details if already registered in database
   router.post("/login", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+
     let queryString = `SELECT * FROM users WHERE email = '${email}'`;
+
     db.query(queryString)
       .then(data => {
         const userData = data.rows;
         for (let user in userData){
-          let userPermission = userData[user].permission
-          const userID = userData[user].id
+          const userPermission = userData[user].permission;
+          const userID = userData[user].id;
+
+          //Load restaurant dashboard is user permission is admin
           if(userPermission === 'admin'){
             req.session['userId'] = userID;
             res.redirect('/restaurant');
           }
+
+          //Load product page is user permission is user
           if(userPermission === 'user'){
             req.session['userId'] = userID;
             res.redirect('/');
@@ -73,6 +83,8 @@ module.exports = (db) => {
       });
   })
 
+  //Update the order status - confirm the order or order is ready
+  //order status is posted upon button click and pass value in hidden text
   router.post("/restaurant", (req, res) => {
     const order_id = req.body.orderID;
     const order_status = req.body.status;
@@ -88,6 +100,11 @@ module.exports = (db) => {
           .status(500)
           .json({error: err.message});
       });
+  })
+
+  router.post("/logout", (req, res) => {
+    req.session['userId'] = null;
+    res.redirect('/');
   })
   return router;
 };

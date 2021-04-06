@@ -81,6 +81,11 @@
   cursor: pointer;
 }
 
+.logout:hover {
+  background-color: var(--yellow);
+  border: none;
+}
+
 /* END OF NAVIGATION */
 
 /* MEDIA SCREENS */
@@ -96,7 +101,7 @@
     width: 100%;
     position: absolute;
     top: 50px;
-    
+
     opacity: 0;
     background-color: rgba(234, 226, 183, 0.5);
     transition: all 0.5s ease;
@@ -112,7 +117,7 @@
     background-color: var(--yellow);
     color: var(--white);
   }
-  
+
   .nav-menu.active {
     left: 0;
     opacity: 1;
