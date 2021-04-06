@@ -1,7 +1,7 @@
-INSERT INTO orders(id, user_id, restaurant_id, ready_for_pickup, fulfilled)
+INSERT INTO orders(id, user_id, restaurant_id, total_amount, status)
 VALUES
-(1, 1, 1, FALSE, FALSE),
-(2, 1, 1, FALSE, FALSE),
-(3, 1, 1, FALSE, FALSE),
-(4, 2, 1, FALSE, FALSE),
-(5, 3, 1, FALSE, FALSE);
+(1, 1, 1, 4500, 'Ready'),
+(2, 1, 1, 2500, 'Ready'),
+(3, 1, 1, 6500, 'Ready'),
+(4, 2, 1, 3000, 'Ready'),
+(5, 3, 1, 4500, 'Ready');
