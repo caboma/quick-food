@@ -39,10 +39,18 @@ module.exports = (db) => {
  ready_for_pickup | boolean | default false
  fulfilled        | boolean | default false
 */
-const products = [1,2,3,4,5,6];
+//const products = [1,2,3,4,5,6];
+const products2 = [1,2,3,4,5,6];
 const testId = 1;
+
   router.post("/", (req, res) =>{
-    console.log("45", req.body);
+    console.log("45", req.body.ids); // has ids
+    products = req.body.ids;
+
+    products = products.split(',');
+    console.log("52A", products);
+
+
     console.log("46", req.data);
     const userId = req.session.user_id
     const addItemToOrder = function (productsArray, order_id) {
