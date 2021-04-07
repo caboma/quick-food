@@ -14,12 +14,17 @@ $(document).ready(function() {
     customerOrderNo = customerOrderNo.text().trim();
     console.log(customerOrderNo); // Remove after debugging
 
+    // Obtain time in minutes
+    let timeToReady = $(this).closest('.order-row').find('.order-duration');
+    timeToReady = timeToReady.text().trim();
+    console.log(timeToReady); // Remove after debugging
+
     // Obtain customer phone number
     let customerPhone = $(this).closest('.order-row').find('.order-customer-phone').val();
     console.log(customerPhone); // Remove after debugging
 
     // Create customer message
-    let customerMsg = `Hey ${customerName}! Order #${customerOrderNo} has been confirmed. You'll receive another SMS notification when it's ready for pick up.`;
+    let customerMsg = `Hey ${customerName}! Order #${customerOrderNo} has been confirmed. You can pick up your order in ${timeToReady} minutes.`;
     console.log(customerMsg);
 
 
@@ -27,6 +32,7 @@ $(document).ready(function() {
     let orderData = {
       name: customerName,
       order: customerOrderNo,
+      time: timeToReady,
       phone: customerPhone,
       message: customerMsg
     }
