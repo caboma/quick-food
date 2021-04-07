@@ -28,16 +28,18 @@
                   <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].customer %></td>
                   <td><input name="duration" placeholder="minutes"></td>
                   <td>
-                    <form method="POST" action="/restaurant">
-                      <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
-                      <input name="status" type="hidden" value="Confirmed">
-                      <button type="submit" class="btn btn-outline-secondary" id="btn-order-confirm"><i class="far fa-thumbs-up"></i></button>
-                    </form>
-                    <form method="POST" action="/restaurant">
-                      <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
-                      <input name="status" type="hidden" value="Ready">
-                      <button type="submit" class="btn btn-outline-secondary" id="btn-order-ready"><i class="far fa-check-circle"></i></button>
-                    </form>
+                    <div class="status-btn">
+                      <form method="POST" action="/restaurant">
+                        <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
+                        <input name="status" type="hidden" value="Confirmed">
+                        <button type="submit" class="btn btn-outline-secondary" id="btn-order-confirm"><i class="far fa-thumbs-up"></i></button>
+                      </form>
+                      <form method="POST" action="/restaurant">
+                        <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
+                        <input name="status" type="hidden" value="Ready">
+                        <button type="submit" class="btn btn-outline-secondary" id="btn-order-ready"><i class="far fa-check-circle"></i></button>
+                      </form>
+                    </div>
                   </td>
                   <td><%= orders[order].status %></td>
                   <td><input class="order-customer-phone" name="phone" type="hidden" value=<%= orders[order].phone %>></td>
