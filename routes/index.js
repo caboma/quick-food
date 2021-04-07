@@ -225,5 +225,12 @@ module.exports = (db) => {
     req.session['user_id'] = null;
     res.redirect('/');
   })
+
+  // Router for the restaurant.js AJAX call
+  router.post('/twilio', (req, res) => {
+    console.log('post and data:', req.body);
+    sendSms(req.body.phone, req.body.message);
+  });
+
   return router;
 };
