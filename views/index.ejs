@@ -75,7 +75,11 @@
                 </tbody>
               </table>
               <div class="card-footer">
+                <% if (user) { %>
                 <form id="place-order-btn" action="/" method="POST"><button type="submit" class="btn btn-outline-primary placeOrder" id="place-order">Place Order</button></form>
+                <% } else {%>
+                  <p>You need to login before you can place order</p>
+                <% } %>
               </div>
             </div>
           </div>
