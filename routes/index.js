@@ -44,7 +44,7 @@ module.exports = (db) => {
   //Retrieve all products in the database and load menu/product page
   router.get("/", (req, res) => {
     const userID = req.session['user_id'];
-    let queryString = `SELECT * FROM products`;
+    let queryString = `SELECT name, description, ROUND((price_cents / 100), 2) AS price_cents, image FROM products`;
 
     db.query(queryString)
       .then(data => {
@@ -134,7 +134,7 @@ module.exports = (db) => {
     const userID = req.session['user_id'];
     const email = req.session['email'];
     let queryString = `
-      SELECT orders.id AS order_number, users.name AS customer, orders.total_amount AS total, orders.status AS status
+      SELECT orders.id AS order_number, users.name AS customer, orders.total_amount AS total, orders.status AS status, users.phone AS phone
       FROM orders JOIN users ON orders.user_id = users.id ORDER BY orders.id`;
     db.query(queryString)
       .then(data => {

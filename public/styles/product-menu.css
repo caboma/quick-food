@@ -17,11 +17,13 @@
 .card-footer{
   display: flex;
   text-align: right;
-  justify-content: space-between;
+  justify-content: left;
 }
+
 .card-footer a{
   text-decoration: none;
   color: var(--red);
+  width: 80%;
 }
 .card-footer a:hover{
   text-decoration: none;
