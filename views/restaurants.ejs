@@ -24,8 +24,8 @@
             <tbody>
               <% for(let order in orders) { %>
                 <tr class="order-row">
-                  <td id="customer-order-number" scope="row" name="order_number" data-toggle="modal" data-target="#orderDetails"><%= orders[order].order_number %></td>
-                  <td id="order-customer-name" data-toggle="modal" data-target="#orderDetails"><%= orders[order].customer %></td>
+                  <td class="customer-order-number" scope="row" name="order_number" data-toggle="modal" data-target="#orderDetails"><%= orders[order].order_number %></td>
+                  <td class="order-customer-name" data-toggle="modal" data-target="#orderDetails"><%= orders[order].customer %></td>
                   <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].total / 100%></td>
                   <td>
                     <form method="POST" action="/restaurant">
@@ -40,7 +40,7 @@
                     </form>
                   </td>
                   <td><%= orders[order].status %></td>
-                  <td id="order-customer-phone"><input name="phone" type="hidden" value=<%= orders[order].phone %>></td>
+                  <td><input class="order-customer-phone" name="phone" type="hidden" value=<%= orders[order].phone %>></td>
                 </tr>
               <% } %>
             </tbody>
