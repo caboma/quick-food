@@ -254,7 +254,6 @@ module.exports = (db) => {
     console.log('post and data:', req.body);
     sendSms(req.body.phone, req.body.message);
   });
-
   router.post('/twilio/ready', (req, res) => {
     console.log('post and data:', req.body);
     sendSms(req.body.phone, req.body.message);

@@ -80,7 +80,7 @@ $(document).ready(function() {
       time: timeToReady,
       phone: customerPhone,
       message: readyMsg
-    }
+    };
 
     // When order is ready
     $.ajax({
@@ -90,7 +90,4 @@ $(document).ready(function() {
     }).then(res => console.log('AJAX req sent', res))
     .catch(err => console.error(err));
   })
-
-
-
 });
