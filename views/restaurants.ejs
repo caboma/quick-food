@@ -16,7 +16,7 @@
               <tr>
                 <th scope="col">Order No</th>
                 <th scope="col">Customer Name</th>
-                <th scope="col">Total</th>
+                <th scope="col">Duration(m)</th>
                 <th scope="col">Status</th>
                 <th scope="col">Remarks</th>
               </tr>
@@ -26,7 +26,7 @@
                 <tr class="order-row">
                   <td scope="row" name="order_number" data-toggle="modal" data-target="#orderDetails"><%= orders[order].order_number %></td>
                   <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].customer %></td>
-                  <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].total / 100%></td>
+                  <td><input name="duration" placeholder="minutes"></td>
                   <td>
                     <form method="POST" action="/restaurant">
                       <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
