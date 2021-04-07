@@ -15,7 +15,7 @@
   padding: 20px;
 }
 #btn-order-confirm, #btn-order-ready {
-  margin: 0px 5px;
+  margin: 5px;
   border: 1px solid var(--orange);
   color: var(--orange);
 }
@@ -35,6 +35,9 @@
   background-color: var(--offwhite);
 }
 
+.status-btn {
+  display: flex;
+}
 .alert-danger {
   margin: 50px;
   text-align: center;
