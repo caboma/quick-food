@@ -63,7 +63,7 @@ $(document).ready(function () {
 
     // Adjusting subtotal
     console.log(priceArray);
-    let newSubTotal = calcSubTotal(priceArray);
+    let newSubTotal = calcSubTotal(priceArray).toFixed(2);
     console.log(newSubTotal);
     $('.subtotal-line').replaceWith(`<td class="subtotal-line">$ ${newSubTotal}</td>`);
 

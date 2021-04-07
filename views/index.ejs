@@ -29,7 +29,7 @@
             <div class="card-header">
               <h4>ORDER DETAILS</h4>
             </div>
-            <div class="card-body">
+            <div class="card-body order-items">
               <table class="table cart-table">
                 <thead class="thead-dark">
                   <tr>
@@ -62,20 +62,20 @@
                 <tbody>
                   <tr>
                     <th scope="row">Sub Total:</th>
-                    <td class="subtotal-line">$ 0.00</td>
+                    <td class="subtotal-line" class="table-total">$ 0.00</td>
                   </tr>
                   <tr>
                     <th scope="row">Tax:</th>
-                    <td class="taxtotal-line">$ 0.00</td>
+                    <td class="taxtotal-line" class="table-total">$ 0.00</td>
                   </tr>
                   <tr>
                     <th scope="row">Total:</th>
-                    <td class="grandtotal-line">$ 0.00</td>
+                    <td class="grandtotal-line" class="table-total">$ 0.00</td>
                   </tr>
                 </tbody>
               </table>
               <div class="card-footer">
-                <form id="place-order-btn" action="/" method="POST"><button type="submit" class="btn btn-outline-primary placeOrder" id="place-order-btn">Place Order</button></form>
+                <form id="place-order-btn" action="/" method="POST"><button type="submit" class="btn btn-outline-primary placeOrder" id="place-order">Place Order</button></form>
               </div>
             </div>
           </div>
@@ -84,15 +84,4 @@
     </div>
   </section>
   <%- include('partials/_footer') %>
-</body>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script>
-  const menu = document.querySelector('#mobile-menu');
-  const menuLinks = document.querySelector('.nav-menu');
-  menu.addEventListener('click', function () {
-    menu.classList.toggle('is-active');
-    menuLinks.classList.toggle('active');
-  })
-</script>
 
-</html>
