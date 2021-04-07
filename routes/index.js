@@ -44,7 +44,7 @@ module.exports = (db) => {
   //Retrieve all products in the database and load menu/product page
   router.get("/", (req, res) => {
     const userID = req.session['user_id'];
-    let queryString = `SELECT name, description, ROUND((price_cents / 100), 2) AS price_cents, image FROM products`;
+    let queryString = `SELECT id, name, description, ROUND((price_cents / 100), 2) AS price_cents, image FROM products`;
 
     db.query(queryString)
       .then(data => {
@@ -104,8 +104,8 @@ module.exports = (db) => {
     const maxIdFunc = function () {
       console.log('67', products);
       let maxIds = db.query(`
-      INSERT INTO orders(id, user_id, restaurant_id)
-      VALUES ((SELECT (MAX(id) + 1) FROM orders), ${userId}, 1)
+      INSERT INTO orders(id, user_id, restaurant_id, status)
+      VALUES ((SELECT (MAX(id) + 1) FROM orders), ${userId}, 1, 'pending')
       RETURNING *;
       `).then(res => {
         return addItemToOrder(products, res.rows[0].id)
@@ -134,8 +134,10 @@ module.exports = (db) => {
     const userID = req.session['user_id'];
     const email = req.session['email'];
     let queryString = `
-      SELECT orders.id AS order_number, users.name AS customer, orders.total_amount AS total, orders.status AS status, users.phone AS phone
-      FROM orders JOIN users ON orders.user_id = users.id ORDER BY orders.id`;
+      SELECT orders.id AS order_number, users.name AS customer, orders.status AS status, users.phone AS phone
+      FROM orders JOIN users ON orders.user_id = users.id
+      WHERE orders.status != 'Ready' OR orders.status=null
+      ORDER BY orders.id DESC`;
     db.query(queryString)
       .then(data => {
         orderLists = data.rows;
