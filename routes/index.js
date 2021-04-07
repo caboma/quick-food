@@ -44,7 +44,7 @@ module.exports = (db) => {
   //Retrieve all products in the database and load menu/product page
   router.get("/", (req, res) => {
     const userID = req.session['user_id'];
-    let queryString = `SELECT * FROM products`;
+    let queryString = `SELECT name, description, ROUND((price_cents / 100), 2) AS price_cents, image FROM products`;
 
     db.query(queryString)
       .then(data => {
