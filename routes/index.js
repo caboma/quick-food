@@ -37,7 +37,7 @@ module.exports = (db) => {
         from: '+13658000804',
         to: phone
       })
-      .then(message => console.log(message.sid, message.status))
+      .then(message => console.log(message.sid, message.status,))
       .catch(err => console.error(err));
   };
 
