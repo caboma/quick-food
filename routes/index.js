@@ -5,7 +5,6 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-// index.js
 const express = require('express');
 const router = express.Router();
 //TWILIO API
@@ -16,21 +15,11 @@ const client = require('twilio')(accountSid, authToken);
 // Initial test message
 const message = 'Your order will be ready for pick up in 5 minutes!';
 const phone = '+16137905701';
-// const {idsInCart} = require('../public/scripts/cart');
-// const idsInCart = require('../public/scripts/cart');
-
 const getPhoneById = require('../public/helper_functions/getUserPhone')
-
-
-
-
-
-
 
 module.exports = (db) => {
 
   const sendSms = (phone, message) => {
-
     client.messages
       .create({
         body: message,
@@ -45,7 +34,6 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     const userID = req.session['user_id'];
     let queryString = `SELECT id, name, description, ROUND((price_cents / 100), 2) AS price_cents, image FROM products`;
-
     db.query(queryString)
       .then(data => {
         productLists = data.rows;
@@ -57,29 +45,16 @@ module.exports = (db) => {
           .status(500)
           .json({error: err.message});
       });
-
   });
-  /*
-        Column      |  Type   |                      Modifiers
-  ------------------+---------+-----------------------------------------------------
-   id               | integer | not null default nextval('orders_id_seq'::regclass)
-   user_id          | integer |
-   restaurant_id    | integer |
-   ready_for_pickup | boolean | default false
-   fulfilled        | boolean | default false
-  */
-  //const products = [1,2,3,4,5,6];
+
   const products2 = [1, 2, 3, 4, 5, 6];
   const testId = 1;
 
   router.post("/", (req, res) => {
     console.log("45", req.body.ids); // has ids
     products = req.body.ids;
-
     products = products.split(',');
     console.log("52A", products);
-
-
     const userId = req.session.user_id
     const addItemToOrder = function (productsArray, order_id) {
       console.log("46", req.data);
@@ -118,15 +93,7 @@ module.exports = (db) => {
         .catch(err => console.error(err));
       return res.rows;
     }
-
     maxIdFunc(res.rows)
-
-    // .then(maxIds => console.log("-----------------RES 62", maxIds.rows[0].max)) // 7
-    //addItemToOrder(products, req.session.user_id, 3)
-    // return router;
-    // console.log("*************")
-    // console.log("userid", req.session.user_id)
-
   })
 
   //Retrieve all current orders and load restaurant dashboard. Only admin user can see this page
@@ -154,9 +121,7 @@ module.exports = (db) => {
   //Check user details if already registered in database
   router.post("/login", (req, res) => {
     const email = req.body.email;
-
     let queryString = `SELECT * FROM users WHERE email = '${email}'`;
-
     db.query(queryString)
       .then(data => {
         const userData = data.rows;
@@ -183,7 +148,6 @@ module.exports = (db) => {
           .status(500)
           .json({error: err.message});
       });
-
   })
 
   //ORDERS and return the orders
@@ -211,7 +175,6 @@ module.exports = (db) => {
   router.post("/restaurant", (req, res) => {
     const order_id = req.body.orderID;
     const order_status = req.body.status;
-
     let queryString = `UPDATE orders SET status = '${order_status}' WHERE id = '${order_id}'`;
     db.query(queryString)
       .then(data => {
@@ -229,7 +192,6 @@ module.exports = (db) => {
     const email = req.body.email;
     const password = req.body.password;
     const contact = req.body.contactNo;
-
     let queryString = `INSERT INTO users (name, email, phone, password, permission)
                        VALUES ('${name}', '${email}', ${contact}, '${password}', 'user')RETURNING *;`;
     db.query(queryString)
