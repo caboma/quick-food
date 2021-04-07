@@ -24,15 +24,9 @@
             <tbody>
               <% for(let order in orders) { %>
                 <tr class="order-row">
-<<<<<<< HEAD
                   <td scope="row" name="order_number" data-toggle="modal" data-target="#orderDetails"><%= orders[order].order_number %></td>
                   <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].customer %></td>
                   <td><input name="duration" placeholder="minutes"></td>
-=======
-                  <td class="customer-order-number" scope="row" name="order_number" data-toggle="modal" data-target="#orderDetails"><%= orders[order].order_number %></td>
-                  <td class="order-customer-name" data-toggle="modal" data-target="#orderDetails"><%= orders[order].customer %></td>
-                  <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].total / 100%></td>
->>>>>>> feature/restaurant-send-sms
                   <td>
                     <form method="POST" action="/restaurant">
                       <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
