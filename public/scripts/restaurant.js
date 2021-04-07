@@ -1,13 +1,7 @@
-// File stops working when these are required
-// require('dotenv').config();
-// const accountSid = process.env.TWILIO_ACCOUNT_SID;
-// const authToken = process.env.TWILIO_AUTH_TOKEN;
-// const client = require('twilio')(accountSid, authToken);
-
 // Trigger SMS message sent to customer from restaurants page
 $(document).ready(function() {
   console.log('The restaurants document is ready.');
-  $('#btn-order-confirm').on('click', function(e) {
+  $('.btn-order-confirm').on('click', function(e) {
     e.preventDefault();
 
     // Obtain customer name
@@ -29,7 +23,24 @@ $(document).ready(function() {
     console.log(customerMsg);
 
 
-    // Send SMS message to customer
+    // Save above data to localStorage
+    let orderData = {
+      name: customerName,
+      order: customerOrderNo,
+      phone: customerPhone,
+      message: customerMsg
+    }
+
+    // Leads to index.js route on line 230
+    $.ajax({
+      url: `/twilio`,
+      method: 'POST',
+      data: orderData
+    }).then(res => console.log('AJAX req sent', res))
+    .catch(err => console.error(err));
+
+
+
 
   })
 });
