@@ -186,6 +186,26 @@ module.exports = (db) => {
 
   })
 
+  //ORDERS and return the orders
+  router.get("/orders", (req, res) => {
+    const id = req.session.user_id;
+    let queryString = `
+    SELECT * FROM orders
+    WHERE user_id = ${id}
+    `
+    db.query(queryString)
+      .then(res => {
+        ordersByUser = res.rows
+        templateVars = ordersByUser
+        console.log(templateVars)
+        res.send("orders", templateVars)
+      })
+      .catch(err => {
+        res.status(500)
+          .json({error: err.message});
+      });
+  })
+
   //Update the order status - confirm the order or order is ready
   //order status is posted upon button click and pass value in hidden text
   router.post("/restaurant", (req, res) => {

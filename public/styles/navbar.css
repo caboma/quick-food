@@ -38,6 +38,10 @@
 #navbar-logo span{
   color: #dbdddf;
 }
+#navbar-logo a{
+  text-decoration: none;
+  color: var(--white);
+}
 
 .nav-menu {
   display: grid;
@@ -49,6 +53,7 @@
 }
 
 .nav-links {
+  padding: 5px;
   text-decoration: none;
   color: var(--white);
 }

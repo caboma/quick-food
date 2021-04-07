@@ -32,7 +32,7 @@
   <div class="nav-container">
     <% if (user) { %>
       <nav class="navbar">
-        <h1 id="navbar-logo"><span>QUICK</span>FOOD</h1>
+        <h1 id="navbar-logo"><a href="/"><span>QUICK</span>FOOD</h1></a>
         <div class="menu-toggle" id="mobile-menu">
           <span class="bar"></span>
           <span class="bar"></span>
@@ -40,9 +40,14 @@
         </div>
         <ul class="nav-menu">
           <li class="currentUser"></li>
-          <form method="POST" action="/logout">
-            <button class="btn btn-outline-light my-2 my-sm-0 logout" type="submit">Logout</button>
-          </form>
+          <li>
+            <a class="nav-links" type="submit" href="/orders">My Orders</a>
+          </li>
+          <li>
+            <form method="POST" action="/logout">
+              <button class="btn btn-outline-light my-2 my-sm-0 logout" type="submit">Logout</button>
+            </form>
+          </li>
         </ul>
       </nav>
     <% } else { %>
