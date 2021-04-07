@@ -230,7 +230,12 @@ module.exports = (db) => {
   })
 
   // Router for the restaurant.js AJAX call
-  router.post('/twilio', (req, res) => {
+  router.post('/twilio/confirmed', (req, res) => {
+    console.log('post and data:', req.body);
+    sendSms(req.body.phone, req.body.message);
+  });
+
+  router.post('/twilio/ready', (req, res) => {
     console.log('post and data:', req.body);
     sendSms(req.body.phone, req.body.message);
   });
