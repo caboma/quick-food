@@ -42,7 +42,7 @@ $(document).ready(function () {
   $('.add-burg-event').on('click', function(e) {
     e.preventDefault();
     const h3 = $(this).closest('.card').find('.card-title');
-    const p = $(this).closest('.card').find('.card-footer');
+    const p = $(this).closest('.card').find('.card-footer h5');
     const p2 = $(this).closest('.card').find('.get-ids');
     console.log(p2);
     let productTitle = h3.text().trim();
