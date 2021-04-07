@@ -24,20 +24,20 @@
             <tbody>
               <% for(let order in orders) { %>
                 <tr class="order-row">
-                  <td scope="row" name="order_number" data-toggle="modal" data-target="#orderDetails"><%= orders[order].order_number %></td>
-                  <td data-toggle="modal" data-target="#orderDetails"><%= orders[order].customer %></td>
-                  <td><input name="duration" placeholder="minutes"></td>
+                  <td class="order-customer-number" scope="row" name="order_number" data-toggle="modal" data-target="#orderDetails"><%= orders[order].order_number %></td>
+                  <td class="order-customer-name" data-toggle="modal" data-target="#orderDetails"><%= orders[order].customer %></td>
+                  <td><input name="duration" class="order-duration" placeholder="minutes"></td>
                   <td>
                     <div class="status-btn">
                       <form method="POST" action="/restaurant">
                         <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
                         <input name="status" type="hidden" value="Confirmed">
-                        <button type="submit" class="btn btn-outline-secondary" id="btn-order-confirm"><i class="far fa-thumbs-up"></i></button>
+                        <button type="submit" class="btn btn-outline-secondary btn-order-confirm" id="btn-order-confirm"><i class="far fa-thumbs-up"></i></button>
                       </form>
                       <form method="POST" action="/restaurant">
                         <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
                         <input name="status" type="hidden" value="Ready">
-                        <button type="submit" class="btn btn-outline-secondary" id="btn-order-ready"><i class="far fa-check-circle"></i></button>
+                        <button type="submit" class="btn btn-outline-secondary btn-order-ready" id="btn-order-ready"><i class="far fa-check-circle"></i></button>
                       </form>
                     </div>
                   </td>
@@ -89,6 +89,5 @@
         You are not authorized to view this page. Please login as admin to load the page.
       </div>
     </div>
-
   <% } %>
   <%- include('partials/_footer') %>

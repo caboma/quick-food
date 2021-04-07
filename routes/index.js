@@ -111,7 +111,7 @@ module.exports = (db) => {
         return addItemToOrder(products, res.rows[0].id)
       }).then(res => {
         const message = `New order: ${res[0].order_id}. Login to your account to accept it.`
-        getPhoneById(2).then(phone => {
+        getPhoneById(userId).then(phone => {
           sendSms(phone, message)
         })
       })
@@ -262,7 +262,11 @@ module.exports = (db) => {
   })
 
   // Router for the restaurant.js AJAX call
-  router.post('/twilio', (req, res) => {
+  router.post('/twilio/confirmed', (req, res) => {
+    console.log('post and data:', req.body);
+    sendSms(req.body.phone, req.body.message);
+  });
+  router.post('/twilio/ready', (req, res) => {
     console.log('post and data:', req.body);
     sendSms(req.body.phone, req.body.message);
   });
