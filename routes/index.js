@@ -211,9 +211,10 @@ module.exports = (db) => {
     const contact = req.body.contactNo;
 
     let queryString = `INSERT INTO users (name, email, phone, password, permission)
-                       VALUES ('${name}', '${email}', ${contact}, '${password}', 'user')`;
+                       VALUES ('${name}', '${email}', ${contact}, '${password}', 'user')RETURNING *;`;
     db.query(queryString)
       .then(data => {
+        req.session['user_id'] = data.rows[0].id
         res.redirect('/');
       })
       .catch(err => {
