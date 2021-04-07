@@ -12,7 +12,7 @@ const message = 'Your order will be ready for pick up in 5 minutes!';
 const phone = '+16137905701';
 
 const sendSms = (phone, message) => {
-  client.messages
+  return client.messages
     .create({
       body: message,
       from: '+13658000804',
