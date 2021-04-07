@@ -176,7 +176,6 @@ module.exports = (db) => {
             res.redirect('/');
           }
         }
-        console.log(req.session.user_id);
       })
       .catch(err => {
         res
@@ -188,17 +187,30 @@ module.exports = (db) => {
 
   //ORDERS and return the orders
   router.get("/orders", (req, res) => {
-    const id = req.session.user_id;
+    const userID = req.session.user_id;
     let queryString = `
-    SELECT * FROM orders
-    WHERE user_id = ${id}
-    `
+    SELECT * FROM orders WHERE user_id = ${userID} ORDER BY id DESC`;
     db.query(queryString)
-      .then(res => {
-        ordersByUser = res.rows
-        templateVars = ordersByUser
-        console.log(templateVars)
-        res.send("orders", templateVars)
+      .then(data => {
+        ordersByUser = data.rows;
+        let order_id = '';
+        for (order of ordersByUser) {
+          order_id = order.id;
+        }
+
+        const queryOrderDetails = `SELECT products.name AS name FROM products JOIN order_details ON order_details.product_id = products.id WHERE order_details.order_id = ${order_id}`;
+
+        db.query(queryOrderDetails)
+          .then(data => {
+            orderDetails = data.rows;
+            templateVars = {orders: ordersByUser, user: userID, details: orderDetails};
+            res.render("my-orders", templateVars);
+          })
+          .catch(err => {
+            res.status(500)
+              .json({error: err.message});
+          });
+
       })
       .catch(err => {
         res.status(500)

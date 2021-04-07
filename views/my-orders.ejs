@@ -1,6 +1,7 @@
 <%- include('partials/_header') %>
 <%- include('partials/_modal') %>
   <section>
+
     <div class="container dashboard">
       <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -10,8 +11,23 @@
       </nav>
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel" aria-labelledby="nav-dashboard-tab">
-
-
+          <% for (let order in orders) { %>
+            <div class="alert alert-warning" role="alert">
+              <table class="table table-borderless">
+                <tbody>
+                  <tr>
+                    <th scope="row">Order No: <%= orders[order].id%></th>
+                    <td>
+                      <% for (let item in details) { %>
+                        <%= details[item].name %>,
+                      <% } %>
+                    </td>
+                    <td>Status : <%= orders[order].status%></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          <% } %>
         </div>
         <div class="tab-pane fade" id="nav-messages" role="tabpanel" aria-labelledby="nav-messages-tab">all messages goes here (stretch)</div>
     </div>
