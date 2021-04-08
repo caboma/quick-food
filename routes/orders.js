@@ -26,6 +26,11 @@ module.exports = (db) => {
       console.log(templateVars);
       res.render("my-orders", templateVars);
     })
+    .catch(err => {
+      res
+        .status(500)
+        .json({error: err.message});
+    });
   });
   return router;
 };

@@ -29,12 +29,13 @@
   border: none;
   color: var(--white);
 }
-
 .order-row:hover {
-  cursor: pointer;
   background-color: var(--offwhite);
 }
-
+.order-duration{
+  width: 100px;
+  margin: 5px;
+}
 .status-btn {
   display: flex;
 }
@@ -42,3 +43,4 @@
   margin: 50px;
   text-align: center;
 }
+
