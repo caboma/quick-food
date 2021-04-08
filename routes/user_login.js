@@ -16,7 +16,7 @@ module.exports = (db) => {
           //Load restaurant dashboard is user permission is admin
           if (userPermission === 'admin') {
             req.session['user_id'] = userID;
-            res.redirect('/r');
+            res.redirect('/restaurant');
           }
           //Load product page is user permission is user
           if (userPermission === 'user') {

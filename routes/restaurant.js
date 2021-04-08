@@ -51,23 +51,6 @@ module.exports = (db) => {
         .status(500)
         .json({error: err.message});
     });
-
-    // let queryString = `
-    //   SELECT orders.id AS order_number, users.name AS customer, orders.status AS status, users.phone AS phone
-    //   FROM orders JOIN users ON orders.user_id = users.id
-    //   WHERE orders.status != 'Ready' OR orders.status=null
-    //   ORDER BY orders.id DESC`;
-    // db.query(queryString)
-    //   .then(data => {
-    //     let orderLists = data.rows;
-    //     const templateVars = {orders: orderLists, user: userID};
-    //     res.render("restaurants", templateVars);
-    //   })
-    //   .catch(err => {
-    //     res
-    //       .status(500)
-    //       .json({error: err.message});
-    //   });
   });
   return router;
 };
