@@ -3,7 +3,9 @@ const router = express.Router();
 const cookieSession = require('cookie-session');
 const dbParams = require('../lib/db');
 
+
 module.exports = (db) => {
+  //Update the order status - confirm the order or order is ready
   router.post("/r", (req, res) => {
     const order_id = req.body.orderID;
     const order_status = req.body.status;
@@ -18,6 +20,7 @@ module.exports = (db) => {
           .json({error: err.message});
       });
   })
+  //Retrieve all current orders and load restaurant dashboard. Only admin user can see this page
   router.get("/", (req, res) => {
     const userID = req.session['user_id'];
     const email = req.session['email'];

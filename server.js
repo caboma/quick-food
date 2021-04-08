@@ -45,18 +45,20 @@ app.use(cookieSession({
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/user_logout");
 const productsRoutes = require("./routes");
-// const loginRoutes = require("./routes/user_login");
 const user_loginRoutes = require("./routes/user_login");
 const user_logoutRoutes = require("./routes/user_logout");
-const restaurant = require("./routes/restaurant")
+const restaurantRoutes = require("./routes/restaurant")
+const ordersRoutes = require("./routes/orders")
+const registerRoutes = require("./routes/register")
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
 app.use("/", productsRoutes(db));
-// app.use("/login", loginRoutes(db))
 app.use("/login", user_loginRoutes(db))
 app.use("/logout", user_logoutRoutes(db))
-app.use("/restaurant", restaurant(db))
+app.use("/restaurant", restaurantRoutes(db))
+app.use("/orders", ordersRoutes(db))
+app.use("/register", registerRoutes(db))
 
 // Note: mount other resources here, using the same pattern above
 

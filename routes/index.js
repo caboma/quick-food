@@ -55,7 +55,6 @@ module.exports = (db) => {
         });
     }
 
-
     const maxIdFunc = function () {
       return db.query(`
     INSERT INTO orders( user_id, restaurant_id, status)
@@ -74,64 +73,6 @@ module.exports = (db) => {
     maxIdFunc()
   })
 
-
-  //Retrieve all current orders and load restaurant dashboard. Only admin user can see this page
-
-
-  //ORDERS and return the orders
-  router.get("/orders", (req, res) => {
-    const userID = req.session.user_id;
-    let queryString = `
-    SELECT * FROM orders WHERE user_id = ${userID} ORDER BY id DESC`;
-    db.query(queryString)
-      .then(data => {
-        ordersByUser = data.rows;
-        const nameList = {};
-        for (let orderNo of ordersByUser) {
-          let queryProductName = `
-            SELECT products.name FROM order_details
-            JOIN products ON products.id = order_details.product_id WHERE order_id = ${orderNo.id}
-          `;
-          db.query(queryProductName)
-            .then(data => {
-              itemLists = data.rows;
-              nameList[orderNo.id] = itemLists
-              if (orderNo.id === ordersByUser[ordersByUser.length - 1].id) {
-                templateVars = {orders: ordersByUser, user: userID, productNames: nameList};
-                res.render("my-orders", templateVars);
-              }
-            })
-        }
-      })
-      .catch(err => {
-        res.status(500)
-          .json({error: err.message});
-      });
-  })
-  //Update the order status - confirm the order or order is ready
-  //order status is posted upon button click and pass value in hidden text
-
-
-  router.post("/register", (req, res) => {
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
-    const contact = req.body.contactNo;
-    let queryString = `INSERT INTO users (name, email, phone, password, permission)
-                       VALUES ('${name}', '${email}', ${contact}, '${password}', 'user')RETURNING *;`;
-    db.query(queryString)
-      .then(data => {
-        req.session['user_id'] = data.rows[0].id
-        res.redirect('/');
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({error: err.message});
-      });
-  })
-
-
   // Router for the restaurant.js AJAX call
   router.post('/twilio/confirmed', (req, res) => {
     sendSms(req.body.phone, req.body.message);
@@ -139,6 +80,5 @@ module.exports = (db) => {
   router.post('/twilio/ready', (req, res) => {
     sendSms(req.body.phone, req.body.message);
   });
-
   return router;
 };

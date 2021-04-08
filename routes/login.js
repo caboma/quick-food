@@ -1,5 +1,5 @@
 const express = require('express');
-const users = require('./users');
+const users = require('./user_logout');
 const router = express.Router();
 const cookieSession = require('cookie-session');
 const dbParams = require('../lib/db');
