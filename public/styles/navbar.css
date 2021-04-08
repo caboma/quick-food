@@ -24,7 +24,7 @@
   display: grid;
   grid-template-columns: 0.2fr auto 1fr;
   align-items: center;
-  height: 50px;
+  height: 60px;
   width: 90%;
   max-width: 1720px;
   margin: 0 auto;
@@ -99,7 +99,7 @@
 
 .logout:hover {
   background-color: var(--yellow);
-  border: none;
+  border: 1px solid var(--yellow);
 }
 
 
@@ -121,11 +121,11 @@
     z-index: 10;
     left: -100%;
     opacity: 0;
-    background-color: rgba(234, 226, 183, 0.5);
+    background-color: rgba(234, 226, 183, 0.25);
     transition: all 0.5s ease;
   }
   .nav-links{
-    color: var(--darkgray);
+    color:var(--white);
     text-align: center;
     line-height: 50px;
     width: 100%;
