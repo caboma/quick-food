@@ -23,18 +23,18 @@
                     <tr>
                       <th scope="row">Order No: </th>
                       <td>
-                        <%= orders[order].id%>
+                        <%= order%>
                       </td>
                     </tr>
                     <tr>
                       <th scope="row" width="100">Items:</th>
                       <td>
                         <ul>
-                          <% for (let item in productNames[orders[order].id]) { %>
+                          <% for (let item of orders[order].productNames) { %>
                             <li>
-                              <%= productNames[orders[order].id][item].name %>
+                              <%= item %>
                             </li>
-                            <% } %>
+                          <% } %>
                         </ul>
                       </td>
                     </tr>
