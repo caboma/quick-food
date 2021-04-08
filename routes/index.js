@@ -193,24 +193,23 @@ module.exports = (db) => {
     db.query(queryString)
       .then(data => {
         ordersByUser = data.rows;
-        let order_id = '';
-        for (order of ordersByUser) {
-          order_id = order.id;
-        }
-
-        const queryOrderDetails = `SELECT products.name AS name FROM products JOIN order_details ON order_details.product_id = products.id WHERE order_details.order_id = ${order_id}`;
-
-        db.query(queryOrderDetails)
+        const nameList = {};
+        for (let orderNo of ordersByUser) {
+          let queryProductName = `
+            SELECT products.name FROM order_details
+            JOIN products ON products.id = order_details.product_id WHERE order_id = ${orderNo.id}
+          `;
+          db.query(queryProductName)
           .then(data => {
-            orderDetails = data.rows;
-            templateVars = {orders: ordersByUser, user: userID, details: orderDetails};
-            res.render("my-orders", templateVars);
-          })
-          .catch(err => {
-            res.status(500)
-              .json({error: err.message});
-          });
+            itemLists = data.rows;
+            nameList[orderNo.id] = itemLists
 
+            if (orderNo.id === ordersByUser[ordersByUser.length - 1].id) {
+              templateVars = {orders: ordersByUser, user: userID, productNames: nameList};
+              res.render("my-orders", templateVars);
+            }
+          })
+        }
       })
       .catch(err => {
         res.status(500)
