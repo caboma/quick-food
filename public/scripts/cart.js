@@ -1,6 +1,6 @@
 // Calculate subtotal, tax, and total
 const calcSubTotal = (priceArr) => {
-  console.log("3", priceArr)
+  console.log("3", priceArr);
   // Sums the subtotal of all items in the array
   return priceArr.reduce((accumulator, currentValue) => accumulator + currentValue);
 };
@@ -35,8 +35,7 @@ const addItemToCartRow = (productName, productPrice, productId) => {
 
 // Create event handler for each product card
 // Event handler for first burger on page.
-$(document).ready(function () {
-  console.log("The document is ready");
+$(document).ready(function() {
   $('.get-ids').css('display', 'none');
 
   $('.add-burg-event').on('click', function(e) {
@@ -44,31 +43,22 @@ $(document).ready(function () {
     const h3 = $(this).closest('.card').find('.card-title');
     const p = $(this).closest('.card').find('.card-footer h5');
     const p2 = $(this).closest('.card').find('.get-ids');
-    console.log(p2);
     let productTitle = h3.text().trim();
     let productPrice = p.text().trim();
     productPrice = Number(productPrice);
     let productId = p2.text().trim();
-    console.log(productTitle);
-    console.log(productPrice);
-    console.log(productId);
-    console.log(itemsInCart);
     addItemToCartRow(productTitle, productPrice);
 
     let prodId = $(this).closest('.card').find('.get-ids');
-    prodId = prodId.text().trim()
+    prodId = prodId.text().trim();
     idsInCart.push(prodId);
     localStorage.setItem('ids', idsInCart);
-    console.log("IDs Arr:", idsInCart);
 
     // Adjusting subtotal
-    console.log(priceArray);
     let newSubTotal = calcSubTotal(priceArray).toFixed(2);
-    console.log(newSubTotal);
     $('.subtotal-line').replaceWith(`<td class="subtotal-line">$ ${newSubTotal}</td>`);
 
     let newGrandTotal = calcGrandTotal(newSubTotal);
-    console.log(newGrandTotal);
     $('.grandtotal-line').replaceWith(`<td class="grandtotal-line">$ ${newGrandTotal}</td>`);
 
     let newTaxPaid = calcTaxPaid(newSubTotal, newGrandTotal);
@@ -77,13 +67,16 @@ $(document).ready(function () {
   });
 
 
-  $('#place-order-btn').on('submit', function (e) {e.preventDefault();
-    $.post({url: '/',
-            data: {ids: localStorage.getItem('ids')},
-            success: function () {alert('form was submitted');
-          }
-      });
+  $('#place-order-btn').on('submit', function(e) {
+    e.preventDefault();
+    $.post({
+      url: '/',
+      data: {ids: localStorage.getItem('ids')},
+      success: function() {
+        alert('form was submitted');
+      }
     });
+  });
 });
 
 // The items from the array are dynamically added/displayed in the sidebar

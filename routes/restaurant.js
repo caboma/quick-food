@@ -19,7 +19,7 @@ module.exports = (db) => {
           .status(500)
           .json({error: err.message});
       });
-  })
+  });
   //Retrieve all current orders and load restaurant dashboard. Only admin user can see this page
   router.get("/", (req, res) => {
     const userID = req.session['user_id'];
@@ -31,7 +31,7 @@ module.exports = (db) => {
       ORDER BY orders.id DESC`;
     db.query(queryString)
       .then(data => {
-        orderLists = data.rows;
+        let orderLists = data.rows;
         const templateVars = {orders: orderLists, user: userID};
         res.render("restaurants", templateVars);
       })
@@ -40,7 +40,7 @@ module.exports = (db) => {
           .status(500)
           .json({error: err.message});
       });
-  })
+  });
   return router;
 };
 

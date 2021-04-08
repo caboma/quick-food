@@ -13,7 +13,7 @@ module.exports = (db) => {
                        VALUES ('${name}', '${email}', ${contact}, '${password}', 'user')RETURNING *;`;
     db.query(queryString)
       .then(data => {
-        req.session['user_id'] = data.rows[0].id
+        req.session['user_id'] = data.rows[0].id;
         res.redirect('/');
       })
       .catch(err => {
@@ -21,7 +21,7 @@ module.exports = (db) => {
           .status(500)
           .json({error: err.message});
       });
-  })
+  });
   return router;
 };
 

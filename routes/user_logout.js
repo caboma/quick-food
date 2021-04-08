@@ -6,6 +6,6 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     req.session['user_id'] = null;
     res.redirect('/');
-  })
+  });
   return router;
 };

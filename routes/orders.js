@@ -11,7 +11,7 @@ module.exports = (db) => {
     SELECT * FROM orders WHERE user_id = ${userID} ORDER BY id DESC`;
     db.query(queryString)
       .then(data => {
-        ordersByUser = data.rows;
+        let ordersByUser = data.rows;
         const nameList = {};
         for (let orderNo of ordersByUser) {
           let queryProductName = `
@@ -20,20 +20,20 @@ module.exports = (db) => {
           `;
           db.query(queryProductName)
             .then(data => {
-              itemLists = data.rows;
-              nameList[orderNo.id] = itemLists
+              let itemLists = data.rows;
+              nameList[orderNo.id] = itemLists;
               if (orderNo.id === ordersByUser[ordersByUser.length - 1].id) {
-                templateVars = {orders: ordersByUser, user: userID, productNames: nameList};
+                let templateVars = {orders: ordersByUser, user: userID, productNames: nameList};
                 res.render("my-orders", templateVars);
               }
-            })
+            });
         }
       })
       .catch(err => {
         res.status(500)
           .json({error: err.message});
       });
-  })
+  });
   return router;
 };
 
