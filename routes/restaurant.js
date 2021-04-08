@@ -27,7 +27,8 @@ module.exports = (db) => {
     console.log("req.body", req.body);
     const order_id = req.body.orderID;
     const order_status = req.body.status;
-    if (!order_status) {
+    console.log("ORDER_STATUS", order_status);
+    if (order_status === 'Confirmed') {
       confirmMsg = `Hey ${req.body.userName}! Order #${req.body.orderID} has been confirmed. You can pick up your order in ${req.body.duration} minutes.`;
     } else {
       confirmMsg = `Hey ${req.body.userName}! Order #${req.body.orderID} is ready for pickup!`;

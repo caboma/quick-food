@@ -28,9 +28,13 @@
                   <td class="order-customer-number" scope="row" name="order_number"><%= order%></td>
                   <td class="order-customer-name"><%= orders[order].userNames %></td>
                   <td>
+                    <ul>
                     <% for (let item of orders[order].productNames) { %>
+                     <li>
                       <%= item %>
+                    </li>
                     <% } %>
+                  </ul>
                   </td>
                   <div class="status-btn">
                     <form method="POST" action="/restaurant">

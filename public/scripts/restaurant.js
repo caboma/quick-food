@@ -1,4 +1,4 @@
-// Trigger SMS message sent to customer from restaurants page
+/* // Trigger SMS message sent to customer from restaurants page
 $(document).ready(function () {
   $('.btn-order-confirm').on('click', function () {
     // e.preventDefault();
@@ -72,12 +72,13 @@ $(document).ready(function () {
     };
 
     // When order is ready
-/*     $.ajax({
+    $.ajax({
       url: `/twilio/ready`,
       method: 'POST',
       data: orderData
     }).then(res => console.log('AJAX req sent', res))
       .catch(err => console.error(err));
-      */
+
   });
 });
+ */
