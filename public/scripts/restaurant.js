@@ -1,7 +1,7 @@
 // Trigger SMS message sent to customer from restaurants page
 $(document).ready(function () {
-  $('.btn-order-confirm').on('click', function (e) {
-    e.preventDefault();
+  $('.btn-order-confirm').on('click', function () {
+    // e.preventDefault();
 
     // Obtain customer name
     let customerName = $(this).closest('.order-row').find('.order-customer-name');
@@ -34,16 +34,16 @@ $(document).ready(function () {
 
     // Leads to index.js route on line 230
     // When order is confirmed
-    $.ajax({
-      url: `/twilio/confirmed`,
-      method: 'POST',
-      data: orderData
-    }).then(res => console.log('AJAX req sent', res))
-      .catch(err => console.error(err));
+  //   $.ajax({
+  //     url: `/twilio/confirmed`,
+  //     method: 'POST',
+  //     data: orderData
+  //   }).then(res => console.log('AJAX req sent', res))
+  //     .catch(err => console.error(err));
   });
 
-  $('.btn-order-ready').on('click', function (e) {
-    e.preventDefault();
+  $('.btn-order-ready').on('click', function () {
+    //e.preventDefault();
 
     // Obtain customer name
     let customerName = $(this).closest('.order-row').find('.order-customer-name');
@@ -72,11 +72,12 @@ $(document).ready(function () {
     };
 
     // When order is ready
-    $.ajax({
+/*     $.ajax({
       url: `/twilio/ready`,
       method: 'POST',
       data: orderData
     }).then(res => console.log('AJAX req sent', res))
       .catch(err => console.error(err));
+      */
   });
 });

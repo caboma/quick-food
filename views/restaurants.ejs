@@ -26,29 +26,33 @@
               <% for(let order in orders) { %>
                 <tr class="order-row">
                   <td class="order-customer-number" scope="row" name="order_number"><%= order%></td>
-                  <td class="order-customer-name"><%= orders[order].userNames[0] %></td>
+                  <td class="order-customer-name"><%= orders[order].userNames %></td>
                   <td>
                     <% for (let item of orders[order].productNames) { %>
                       <%= item %>
                     <% } %>
                   </td>
+                  <div class="status-btn">
+                    <form method="POST" action="/restaurant">
                   <td><input name="duration" class="order-duration" placeholder="minutes"></td>
                   <td>
-                    <div class="status-btn">
-                      <form method="POST" action="/restaurant">
-                        <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
+                        <input name="userName" type="hidden" value=<%= orders[order].userNames %>>
+                        <input name="orderID" type="hidden" value=<%= order %>>
                         <input name="status" type="hidden" value="Confirmed">
+                        <input class="order-customer-phone" name="phone" type="hidden" value=<%=orders[order].phone %>>
                         <button type="submit" class="btn btn-outline-secondary btn-order-confirm" id="btn-order-confirm"><i class="far fa-thumbs-up"></i></button>
                       </form>
                       <form method="POST" action="/restaurant">
-                        <input name="orderID" type="hidden" value=<%= orders[order].order_number %>>
+                        <input name="userName" type="hidden" value=<%= orders[order].userNames %>>
+                        <input name="orderID" type="hidden" value=<%= order %>>
                         <input name="status" type="hidden" value="Ready">
+                        <input class="order-customer-phone" name="phone" type="hidden" value=<%=orders[order].phone %>>
                         <button type="submit" class="btn btn-outline-secondary btn-order-ready" id="btn-order-ready"><i class="far fa-check-circle"></i></button>
                       </form>
                     </div>
                   </td>
                   <td><%= orders[order].status%></td>
-                  <td><input class="order-customer-phone" name="phone" type="hidden" value=<%= orders[order].phone %>></td>
+                  <td><input class="order-customer-phone" name="phone" type="hidden" value=<%=orders[order].phone %>></td>
                 </tr>
               <% } %>
             </tbody>
