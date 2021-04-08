@@ -13,16 +13,25 @@
         <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel" aria-labelledby="nav-dashboard-tab">
           <% for (let order in orders) { %>
             <div class="alert alert-warning" role="alert">
-              <table class="table ">
+              <table class="table">
+                <thead>
+
+                </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">Order No: <%= orders[order].id%></th>
-                    <td>
-                      <% for (let item of productNames[orders[order].id]) { %>
-                        <%= item.name %>
-                      <% } %>
-                    </td>
-                    <td>Status : <%= orders[order].status%></td>
+                    <th scope="row">Order No: </th>
+                    <td><%= orders[order].id%></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" width="100">Items:</th>
+                    <td><% for (let item of productNames[orders[order].id]) { %>
+                      <%= item.name %>
+                    <% } %>
+                  </td>
+                  </tr>
+                  <tr>
+                    <td>Status :</td>
+                    <td><%= orders[order].status%></td>
                   </tr>
                 </tbody>
               </table>
