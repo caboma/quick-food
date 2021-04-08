@@ -48,7 +48,7 @@ const productsRoutes = require("./routes");
 // const loginRoutes = require("./routes/user_login");
 const user_loginRoutes = require("./routes/user_login");
 const user_logoutRoutes = require("./routes/user_logout");
-
+const restaurant = require("./routes/restaurant")
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
@@ -56,6 +56,7 @@ app.use("/", productsRoutes(db));
 // app.use("/login", loginRoutes(db))
 app.use("/login", user_loginRoutes(db))
 app.use("/logout", user_logoutRoutes(db))
+app.use("/restaurant", restaurant(db))
 
 // Note: mount other resources here, using the same pattern above
 
