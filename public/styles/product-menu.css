@@ -10,15 +10,12 @@
 
 .card{
   margin: 20px auto;
-  padding: 0;
+  padding: 10px;
   border: 0;
   width: 18rem;
 }
-.card{
-  margin: 20px auto;
-  padding: 0;
-  border: 0;
-  width: 18rem;
+.card:hover{
+  box-shadow: 0px 5px 10px var(--orange);
 }
 .card-footer{
   display: flex;
