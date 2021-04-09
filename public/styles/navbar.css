@@ -26,7 +26,6 @@ body {
 .navbar {
   display: grid;
   grid-template-columns: 0.2fr auto 1fr;
-  align-items: center;
   height: 60px;
   width: 90%;
   max-width: 1720px;
@@ -45,7 +44,6 @@ body {
   text-decoration: none;
   color: var(--white);
 }
-
 .nav-menu {
   display: grid;
   grid-template-columns: repeat(5, auto);
@@ -53,10 +51,10 @@ body {
   text-align: center;
   width: 50%;
   justify-self: end;
+  align-items: center;
 }
 
 .nav-links {
-  padding: 5px;
   text-decoration: none;
   color: var(--white);
 }
@@ -120,7 +118,7 @@ body {
     padding: 0;
     width: 100%;
     position: absolute;
-    top: 50px;
+    top: 60px;
     z-index: 10;
     left: -100%;
     opacity: 0;

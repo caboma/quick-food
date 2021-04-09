@@ -54,7 +54,7 @@ module.exports = (db) => {
 
     let queryString = ` SELECT orders.*, products.name, users.name AS customer, users.phone AS phone FROM orders JOIN users ON orders.user_id = users.id JOIN order_details ON order_details.order_id = orders.id
     JOIN products ON products.id = order_details.product_id
-    WHERE orders.user_id = ${userID} ORDER BY orders.id DESC`;
+    WHERE orders.status != 'Ready' ORDER BY orders.id DESC`;
     db.query(queryString)
     .then (data => {
       const orders = {};
