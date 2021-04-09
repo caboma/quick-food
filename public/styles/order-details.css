@@ -7,6 +7,9 @@
   --offwhite: #EAE2B7;
   --white: #FFF;
 }
+.card:hover {
+  box-shadow: 0px;
+}
 .card-header{
   background-color: var(--orange);
   color: var(--white);

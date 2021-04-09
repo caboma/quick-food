@@ -7,22 +7,17 @@
   --offwhite: #EAE2B7;
   --white: #FFF;
 }
-
 .card{
   margin: 20px auto;
   padding: 10px;
   border: 0;
   width: 18rem;
 }
-.card:hover{
-  box-shadow: 0px 5px 10px var(--orange);
-}
 .card-footer{
   display: flex;
   text-align: right;
   justify-content: left;
 }
-
 .card-footer a{
   text-decoration: none;
   color: var(--red);
